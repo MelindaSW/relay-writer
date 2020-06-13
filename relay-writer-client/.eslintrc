@@ -1,0 +1,28 @@
+{
+    "extends": [
+        "prettier",
+        "react-app"
+    ],
+    "plugins": [
+        "prettier"
+    ],
+    "env": {
+        "node": true,
+        "es6": true,
+        "mocha": true
+    },
+    "rules": {
+        "prettier/prettier": "error",
+        "arrow-body-style": [
+            "error",
+            "always"
+        ],
+        "eqeqeq": [
+            "error",
+            "always",
+            {
+                "null": "ignore"
+            }
+        ]
+    }
+}
