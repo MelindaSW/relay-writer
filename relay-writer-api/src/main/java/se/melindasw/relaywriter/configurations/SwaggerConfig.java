@@ -30,8 +30,7 @@ public class SwaggerConfig {
   private ApiInfo apiEndPointsInfo() {
     return new ApiInfoBuilder()
         .title("relay-writer-api by MelindaSW")
-        .description(
-            "API for the dnd relay writer app")
+        .description("API for the dnd relay writer app")
         .contact(new Contact("Melinda Sandström-Wagner", "https://github.com/MelindaSW", ""))
         .version("0.0.1")
         .build();
