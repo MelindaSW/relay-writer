@@ -1,4 +1,4 @@
-package se.melindasw.relaywriter;
+package se.melindasw.relaywriter.usertests;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,8 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RelayWriterApplicationTests {
-
+public class UserControllerTests {
   @Test
   public void contextLoads() {}
 }
