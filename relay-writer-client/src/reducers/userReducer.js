@@ -5,7 +5,7 @@ const userState = {
 
 export function userReducer(state = userState, action) {
   switch (action.type) {
-    case CHANGE_NAME:
+    case 'CHANGE_NAME':
       return { ...state, name: action.name }
     default:
       return state
