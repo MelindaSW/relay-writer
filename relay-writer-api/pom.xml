@@ -11,7 +11,7 @@
     <groupId>se.melindasw</groupId>
     <artifactId>relay-writer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-<!--    <packaging>war</packaging>-->
+    <!--    <packaging>war</packaging>-->
     <name>relay-writer-api</name>
     <description>Spring Boot API</description>
 
@@ -78,7 +78,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-<!--            <scope>provided</scope>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -100,6 +99,7 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.9.2</version>
         </dependency>
+
     </dependencies>
 
     <build>
