@@ -4,6 +4,8 @@ import lombok.Data;
 import se.melindasw.relaywriter.users.Users;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -12,7 +14,9 @@ public class Roles {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  @Column(unique = true)
   private String role;
 
-  @ManyToOne @JoinColumn private Users users;
+  @ManyToMany(mappedBy = "role")
+  private Set<Users> users = new HashSet<>();
 }

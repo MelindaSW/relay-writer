@@ -5,6 +5,7 @@ import se.melindasw.relaywriter.auth.Roles;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,10 +16,10 @@ public class Users {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String userName;
 
-  @Column(nullable = false)
+  @Column(nullable = false, unique = true)
   private String email;
 
   @Column(nullable = false)
@@ -27,6 +28,14 @@ public class Users {
   @Column(nullable = false)
   private Date createdAt;
 
-  @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-  private Set<Roles> roles;
+  @ManyToMany @JoinTable
+  //          (
+  //      name = "APP_USER_ROLE",
+  //      joinColumns = {@JoinColumn(name = "USER_ID")},
+  //      inverseJoinColumns = {@JoinColumn(name = "ROLE_ID")})
+  private Set<Roles> role;
+
+  {
+    role = new HashSet<>();
+  }
 }
