@@ -15,8 +15,15 @@ public class UsersServiceImplementation implements UsersService {
   }
 
   @Override
-  public UsersDTO addUser(Users user) {
-    return null;
+  public UsersDTO addUser(NewUserDTO newUser) {
+    Users user =
+        new Users(
+            newUser.getUserName(),
+            newUser.getEmail(),
+            newUser.getPassword(),
+            newUser.getCreatedAt());
+    userRepo.save(user);
+    return convertToUserDTO(user);
   }
 
   @Override
@@ -52,5 +59,9 @@ public class UsersServiceImplementation implements UsersService {
   @Override
   public boolean checkIfEmailExists(String email) {
     return false;
+  }
+
+  private UsersDTO convertToUserDTO(Users user) {
+    return new UsersDTO(user.getId(), user.getUserName(), user.getEmail(), user.getCreatedAt());
   }
 }

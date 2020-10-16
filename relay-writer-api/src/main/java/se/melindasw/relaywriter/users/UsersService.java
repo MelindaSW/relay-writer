@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public interface UsersService {
-  UsersDTO addUser(Users user);
+  UsersDTO addUser(NewUserDTO user);
 
   String deleteUser(Long userID);
 

@@ -4,7 +4,7 @@ import lombok.Data;
 import se.melindasw.relaywriter.auth.Roles;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,7 +14,7 @@ public class Users {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  private Long id;
 
   @Column(nullable = false, unique = true)
   private String userName;
@@ -26,16 +26,29 @@ public class Users {
   private String password;
 
   @Column(nullable = false)
-  private Date createdAt;
+  private LocalDateTime createdAt;
 
-  @ManyToMany @JoinTable
-  //          (
-  //      name = "APP_USER_ROLE",
-  //      joinColumns = {@JoinColumn(name = "USER_ID")},
-  //      inverseJoinColumns = {@JoinColumn(name = "ROLE_ID")})
-  private Set<Roles> role;
+  @ManyToMany(cascade = {CascadeType.ALL})
+  @JoinTable(
+      name = "users_roles",
+      joinColumns = {@JoinColumn(name = "roles_id")},
+      inverseJoinColumns = {@JoinColumn(name = "users_id")})
+  private Set<Roles> roles = new HashSet<>();
 
-  {
-    role = new HashSet<>();
+  public Users() {}
+
+  public Users(String userName, String email, String password, LocalDateTime createdAt) {
+    this.userName = userName;
+    this.email = email;
+    this.password = password;
+    this.createdAt = createdAt;
+  }
+
+  public Users(Long id, String userName, String email, String password, LocalDateTime createdAt) {
+    this.id = id;
+    this.userName = userName;
+    this.email = email;
+    this.password = password;
+    this.createdAt = createdAt;
   }
 }
