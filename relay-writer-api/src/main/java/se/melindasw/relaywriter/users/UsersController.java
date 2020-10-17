@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.melindasw.relaywriter.exceptions.IncorrectRequestException;
 
 import java.util.List;
 
@@ -22,6 +23,11 @@ public class UsersController {
   @ApiOperation(value = "Adds one new user", response = ResponseEntity.class)
   @PostMapping("/add")
   public ResponseEntity<UsersDTO> addUser(@RequestBody final NewUserDTO newUser) {
+    if (newUser.getUserName() == null
+        || newUser.getEmail() == null
+        || newUser.getPassword() == null) {
+      throw new IncorrectRequestException();
+    }
     ResponseEntity<UsersDTO> response =
         new ResponseEntity(service.addUser(newUser), HttpStatus.CREATED);
     return response;
@@ -35,9 +41,9 @@ public class UsersController {
   }
 
   @ApiOperation(value = "Returns one user", response = ResponseEntity.class)
-  @GetMapping("/get-one/{id}")
-  public ResponseEntity<UsersDTO> getOneUser(@PathVariable Long id) {
-    UsersDTO user = service.getUserByID(id);
+  @GetMapping("/get-one/{userId}")
+  public ResponseEntity<UsersDTO> getOneUser(@PathVariable Long userId) {
+    UsersDTO user = service.getUserByID(userId);
     return new ResponseEntity<>(user, HttpStatus.OK);
   }
 
@@ -57,26 +63,35 @@ public class UsersController {
 
   @ApiOperation(value = "Change password for one user", response = ResponseEntity.class)
   @PutMapping("/change-password")
-  public ResponseEntity<String> changePassword(
-      @RequestBody Long userId, String oldPassword, String newPassword) {
-    // TODO: change password
-    String response = service.changePassword(oldPassword, newPassword);
+  public ResponseEntity<String> changePassword(@RequestBody NewPasswordDTO newPwd) {
+    if (newPwd.getUserId() == null
+        || newPwd.getOldPassword() == null
+        || newPwd.getNewPassword() == null) {
+      throw new IncorrectRequestException();
+    }
+    String response =
+        service.changePassword(
+            newPwd.getUserId(), newPwd.getOldPassword(), newPwd.getNewPassword());
     return new ResponseEntity<>(response, HttpStatus.CREATED);
   }
 
-  @ApiOperation(value = "Check if the username already exists.", response = ResponseEntity.class)
-  @GetMapping("/check-username")
-  public ResponseEntity<Boolean> checkUsername(@RequestBody String userName) {
-    // TODO: validate username
-    boolean nameExists = service.checkIfUserNameExists(userName);
+  @ApiOperation(value = "Check if the username exists.", response = ResponseEntity.class)
+  @GetMapping("/check-username/{username}")
+  public ResponseEntity<Boolean> checkUsername(@PathVariable String username) {
+    if (username == null) {
+      throw new IncorrectRequestException();
+    }
+    boolean nameExists = service.checkUserNameExists(username);
     return new ResponseEntity<>(nameExists, HttpStatus.OK);
   }
 
-  @ApiOperation(value = "Check if the email already exists.", response = ResponseEntity.class)
-  @GetMapping("/check-email")
-  public ResponseEntity<Boolean> checkEmail(@RequestBody String email) {
-    // TODO: validate email - only one user can exist per email
-    boolean emailExists = service.checkIfEmailExists(email);
+  @ApiOperation(value = "Check if the email exists.", response = ResponseEntity.class)
+  @GetMapping("/check-email/{email}")
+  public ResponseEntity<Boolean> checkEmail(@PathVariable String email) {
+    if (email == null) {
+      throw new IncorrectRequestException();
+    }
+    boolean emailExists = service.checkEmailExists(email);
     return new ResponseEntity<>(emailExists, HttpStatus.OK);
   }
 }

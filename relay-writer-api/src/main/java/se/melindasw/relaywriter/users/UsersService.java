@@ -13,9 +13,9 @@ public interface UsersService {
 
   UsersDTO updateUser(UsersDTO user);
 
-  String changePassword(String oldPassword, String newPassword);
+  String changePassword(Long userId, String oldPassword, String newPassword);
 
-  boolean checkIfUserNameExists(String userName);
+  boolean checkUserNameExists(String userName);
 
-  boolean checkIfEmailExists(String email);
+  boolean checkEmailExists(String email);
 }

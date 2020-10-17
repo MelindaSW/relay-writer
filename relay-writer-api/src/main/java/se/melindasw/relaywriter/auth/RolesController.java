@@ -1,6 +1,7 @@
 package se.melindasw.relaywriter.auth;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,13 @@ import java.util.List;
 @RequestMapping("/roles")
 public class RolesController {
 
+  private RolesService service;
+
+  @Autowired
+  public RolesController(RolesService service) {
+    this.service = service;
+  }
+
   @ApiOperation(value = "Get a list of all roles", response = ResponseEntity.class)
   @GetMapping("/all")
   public ResponseEntity<List<Roles>> getRoles() {
@@ -18,14 +26,14 @@ public class RolesController {
     return null;
   }
 
-  @ApiOperation(value = "Connect role to a user", response = ResponseEntity.class)
+  @ApiOperation(value = "Add new role", response = ResponseEntity.class)
   @PutMapping("/add")
   public ResponseEntity<String> addRole(@RequestBody Long roleId, Long userId) {
     // TODO
     return new ResponseEntity<>("Role added", HttpStatus.OK);
   }
 
-  @ApiOperation(value = "Remove role from database", response = ResponseEntity.class)
+  @ApiOperation(value = "Delete one role", response = ResponseEntity.class)
   @DeleteMapping("/delete/{roleId}")
   public ResponseEntity<String> deleteRole(@PathVariable Long roleId) {
     // TODO
