@@ -1,17 +1,16 @@
 package se.melindasw.relaywriter.users;
 
 import org.springframework.stereotype.Service;
-import se.melindasw.relaywriter.auth.Roles;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class UsersServiceImplementation implements UsersService {
-  private final UsersRepo userRepo;
+  private final UsersRepo usersRepo;
 
   public UsersServiceImplementation(UsersRepo repo) {
-    this.userRepo = repo;
+    this.usersRepo = repo;
   }
 
   @Override
@@ -22,32 +21,45 @@ public class UsersServiceImplementation implements UsersService {
             newUser.getEmail(),
             newUser.getPassword(),
             newUser.getCreatedAt());
-    userRepo.save(user);
+    usersRepo.save(user);
     return convertToUserDTO(user);
   }
 
   @Override
-  public String deleteUser(Long userID) {
-    return null;
+  public List<UsersDTO> getAllUsers() {
+    List<Users> allUsers = usersRepo.findAll();
+    List<UsersDTO> allUsersDTO = new ArrayList<>();
+    for (Users user : allUsers) {
+      allUsersDTO.add(convertToUserDTO(user));
+    }
+    return allUsersDTO;
   }
 
   @Override
-  public List<Users> getAllUsers() {
-    return null;
+  public String deleteUser(Long userID) {
+    usersRepo.deleteById(userID);
+    return "User with id " + userID + " deleted.";
   }
 
   @Override
   public UsersDTO getUserByID(Long userID) {
-    return null;
+    return convertToUserDTO(usersRepo.getOne(userID));
   }
 
   @Override
-  public Set<Roles> addRoleToUser(Long userID, String role) {
-    return null;
+  public UsersDTO updateUser(UsersDTO user) {
+    Users userToUpdate = null;
+    if (usersRepo.findById(user.getId()).isPresent()) {
+      userToUpdate = usersRepo.findById(user.getId()).get();
+      userToUpdate.setEmail(user.getEmail());
+      userToUpdate.setUserName(user.getUserName());
+      return convertToUserDTO(userToUpdate);
+    }
+    return user;
   }
 
   @Override
-  public Set<Roles> removeRoleFromUser(Long userID, String role) {
+  public String changePassword(String oldPassword, String newPassword) {
     return null;
   }
 

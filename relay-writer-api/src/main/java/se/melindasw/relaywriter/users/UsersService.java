@@ -1,22 +1,19 @@
 package se.melindasw.relaywriter.users;
 
-import se.melindasw.relaywriter.auth.Roles;
-
 import java.util.List;
-import java.util.Set;
 
 public interface UsersService {
   UsersDTO addUser(NewUserDTO user);
 
   String deleteUser(Long userID);
 
-  List<Users> getAllUsers();
+  List<UsersDTO> getAllUsers();
 
   UsersDTO getUserByID(Long userID);
 
-  Set<Roles> addRoleToUser(Long userID, String role);
+  UsersDTO updateUser(UsersDTO user);
 
-  Set<Roles> removeRoleFromUser(Long userID, String role);
+  String changePassword(String oldPassword, String newPassword);
 
   boolean checkIfUserNameExists(String userName);
 

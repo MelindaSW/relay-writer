@@ -6,10 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 @RestController
+@RequestMapping("/users")
 public class UsersController {
 
   private final UsersService service;
@@ -20,70 +20,63 @@ public class UsersController {
   }
 
   @ApiOperation(value = "Adds one new user", response = ResponseEntity.class)
-  @PostMapping("user/add")
+  @PostMapping("/add")
   public ResponseEntity<UsersDTO> addUser(@RequestBody final NewUserDTO newUser) {
-    //    TODO: should return error when username or email is already registered in database
     ResponseEntity<UsersDTO> response =
         new ResponseEntity(service.addUser(newUser), HttpStatus.CREATED);
     return response;
   }
 
   @ApiOperation(value = "Returns a list of all users", response = ResponseEntity.class)
-  @GetMapping("user/get-all")
-  public ResponseEntity<Set<UsersDTO>> getAllUsers() {
-    //    TODO: return list of all users
-    Set<UsersDTO> allUsers = new HashSet<>();
+  @GetMapping("/get-all")
+  public ResponseEntity<List<UsersDTO>> getAllUsers() {
+    List<UsersDTO> allUsers = service.getAllUsers();
     return new ResponseEntity<>(allUsers, HttpStatus.OK);
   }
 
-  @ApiOperation(value = "Returns roles connected to one user", response = ResponseEntity.class)
-  @GetMapping("user/get-roles")
-  public ResponseEntity<String> getRolesForUser() {
-    //    TODO: return list of roles for one user
-    return new ResponseEntity<>("TODO", HttpStatus.OK);
+  @ApiOperation(value = "Returns one user", response = ResponseEntity.class)
+  @GetMapping("/get-one/{id}")
+  public ResponseEntity<UsersDTO> getOneUser(@PathVariable Long id) {
+    UsersDTO user = service.getUserByID(id);
+    return new ResponseEntity<>(user, HttpStatus.OK);
   }
 
-  @ApiOperation(
-      value = "Searches for user by name and returns true or false whether it already exists",
-      response = ResponseEntity.class)
-  @GetMapping("user/validate-username")
-  public ResponseEntity<Boolean> validateUsername(@RequestBody String userName) {
-    // TODO: validate username
-    return new ResponseEntity<>(true, HttpStatus.OK);
+  @ApiOperation(value = "Delete one user", response = ResponseEntity.class)
+  @DeleteMapping("/delete/{userId}")
+  public ResponseEntity<String> deleteUser(@PathVariable Long userId) {
+    String result = service.deleteUser(userId);
+    return new ResponseEntity<>(result, HttpStatus.OK);
   }
 
-  @ApiOperation(
-      value = "Searches for email and returns true or false whether it already exists",
-      response = ResponseEntity.class)
-  @GetMapping("user/validate-email")
-  public ResponseEntity<Boolean> validateEmail(@RequestBody String email) {
-    // TODO: validate email - only one user can exist per email
-    return new ResponseEntity<>(true, HttpStatus.OK);
-  }
-
-  @ApiOperation(
-      value = "Deletes one user based on id in path variable",
-      response = ResponseEntity.class)
-  @DeleteMapping("user/delete/{id}")
-  public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-    // TODO: delete user
-    return new ResponseEntity<>("User with ID " + id + " deleted.", HttpStatus.OK);
+  @ApiOperation(value = "Update one user", response = ResponseEntity.class)
+  @PutMapping("/update")
+  public ResponseEntity<UsersDTO> updateUser(@RequestBody UsersDTO user) {
+    UsersDTO updatedUser = service.updateUser(user);
+    return new ResponseEntity<>(updatedUser, HttpStatus.CREATED);
   }
 
   @ApiOperation(value = "Change password for one user", response = ResponseEntity.class)
-  @PutMapping("user/change-password")
+  @PutMapping("/change-password")
   public ResponseEntity<String> changePassword(
       @RequestBody Long userId, String oldPassword, String newPassword) {
     // TODO: change password
-    return new ResponseEntity<>(
-        "Password for user with id " + userId + " changed.", HttpStatus.CREATED);
+    String response = service.changePassword(oldPassword, newPassword);
+    return new ResponseEntity<>(response, HttpStatus.CREATED);
   }
 
-  @ApiOperation(value = "Change username for one user", response = ResponseEntity.class)
-  @PutMapping("user/change-username")
-  public ResponseEntity<String> changeUsername(@RequestBody Long userId, String userName) {
-    // TODO: change userName
-    return new ResponseEntity<>(
-        "Username for user with id " + userId + " changed to " + userName, HttpStatus.CREATED);
+  @ApiOperation(value = "Check if the username already exists.", response = ResponseEntity.class)
+  @GetMapping("/check-username")
+  public ResponseEntity<Boolean> checkUsername(@RequestBody String userName) {
+    // TODO: validate username
+    boolean nameExists = service.checkIfUserNameExists(userName);
+    return new ResponseEntity<>(nameExists, HttpStatus.OK);
+  }
+
+  @ApiOperation(value = "Check if the email already exists.", response = ResponseEntity.class)
+  @GetMapping("/check-email")
+  public ResponseEntity<Boolean> checkEmail(@RequestBody String email) {
+    // TODO: validate email - only one user can exist per email
+    boolean emailExists = service.checkIfEmailExists(email);
+    return new ResponseEntity<>(emailExists, HttpStatus.OK);
   }
 }
