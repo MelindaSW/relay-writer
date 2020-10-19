@@ -1,4 +1,4 @@
-package se.melindasw.relaywriter.story;
+package se.melindasw.relaywriter.snippet;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +12,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public class Snippets {
+public class Snippet {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
