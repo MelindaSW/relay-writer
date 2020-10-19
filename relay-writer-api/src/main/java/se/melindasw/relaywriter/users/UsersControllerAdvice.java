@@ -12,7 +12,7 @@ public class UsersControllerAdvice {
   @ResponseBody
   @ExceptionHandler(UserNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
-  public String habitNotFoundHandler(UserNotFoundException e) {
+  public String userNotFoundHandler(UserNotFoundException e) {
     return e.getMessage();
   }
 }
