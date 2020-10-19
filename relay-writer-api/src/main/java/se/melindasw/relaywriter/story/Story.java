@@ -2,7 +2,7 @@ package se.melindasw.relaywriter.story;
 
 import lombok.Getter;
 import lombok.Setter;
-import se.melindasw.relaywriter.snippet.Snippets;
+import se.melindasw.relaywriter.snippet.Snippet;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-public class Stories {
+public class Story {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,14 +24,18 @@ public class Stories {
 
   @OneToMany
   @JoinColumn(name = "story_fk")
-  private Set<Snippets> snippets;
+  private Set<Snippet> snippets;
 
-  public Stories() {}
+  public Story() {}
 
-  public Stories(LocalDateTime createdAt, String title, String description) {
+  public Story(LocalDateTime createdAt, String title, String description) {
     this.createdAt = createdAt;
     this.title = title;
     this.description = description;
     snippets = new HashSet<>();
+  }
+
+  public void addSnippet(Snippet newSnippet) {
+    snippets.add(newSnippet);
   }
 }
