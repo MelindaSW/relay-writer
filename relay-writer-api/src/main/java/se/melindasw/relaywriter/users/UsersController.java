@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.melindasw.relaywriter.auth.RolesDTO;
 import se.melindasw.relaywriter.exceptions.IncorrectRequestException;
 
 import java.util.List;
@@ -93,5 +94,26 @@ public class UsersController {
     }
     boolean emailExists = service.checkEmailExists(email);
     return new ResponseEntity<>(emailExists, HttpStatus.OK);
+  }
+
+  @ApiOperation(value = "Add role to one user", response = ResponseEntity.class)
+  @PutMapping("/add-role")
+  public ResponseEntity<String> assignRoleToUser(@RequestBody UserRoleDTO ur) {
+    String response = service.assignRoleToUser(ur.getUserId(), ur.getRoleId());
+    return new ResponseEntity<>(response, HttpStatus.CREATED);
+  }
+
+  @ApiOperation(value = "Remove role from one user", response = ResponseEntity.class)
+  @PutMapping("/remove-role")
+  public ResponseEntity<String> removeRoleFromUser(@RequestBody UserRoleDTO ur) {
+    String response = service.removeRoleFromUser(ur.getUserId(), ur.getRoleId());
+    return new ResponseEntity<>(response, HttpStatus.CREATED);
+  }
+
+  @ApiOperation(value = "Get a list of all roles for one user", response = ResponseEntity.class)
+  @GetMapping("/user-roles/{userId}")
+  public ResponseEntity<List<RolesDTO>> getRolesForUser(@PathVariable Long userId) {
+    List<RolesDTO> rolesForUser = service.getRolesForUser(userId);
+    return new ResponseEntity<>(rolesForUser, HttpStatus.OK);
   }
 }

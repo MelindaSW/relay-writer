@@ -1,27 +1,35 @@
 package se.melindasw.relaywriter.users;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import se.melindasw.relaywriter.auth.Roles;
+import se.melindasw.relaywriter.auth.RolesDTO;
+import se.melindasw.relaywriter.auth.RolesRepo;
+import se.melindasw.relaywriter.exceptions.RoleNotFoundException;
 import se.melindasw.relaywriter.exceptions.UserNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UsersServiceImplementation implements UsersService {
   private final UsersRepo usersRepo;
+  private final RolesRepo rolesRepo;
 
-  public UsersServiceImplementation(UsersRepo repo) {
-    this.usersRepo = repo;
+  @Autowired
+  public UsersServiceImplementation(UsersRepo usersRepo, RolesRepo rolesRepo) {
+    this.usersRepo = usersRepo;
+    this.rolesRepo = rolesRepo;
   }
 
   @Override
   public UsersDTO addUser(NewUserDTO newUser) {
-    Users user =
-        new Users(
-            newUser.getUserName(),
-            newUser.getEmail(),
-            newUser.getPassword(),
-            newUser.getCreatedAt());
+    Users user = new Users();
+    user.setUserName(newUser.getUserName());
+    user.setPassword(newUser.getPassword());
+    user.setEmail(newUser.getEmail());
+    user.setCreatedAt(newUser.getCreatedAt());
     usersRepo.save(user);
     return convertToUserDTO(user);
   }
@@ -97,7 +105,70 @@ public class UsersServiceImplementation implements UsersService {
     return !u.isEmpty();
   }
 
+  @Override
+  public String assignRoleToUser(Long userId, Long roleId) {
+    if (rolesRepo.findById(roleId).isEmpty()) {
+      throw new RoleNotFoundException(roleId);
+    }
+    if (usersRepo.findById(userId).isEmpty()) {
+      throw new RoleNotFoundException("The user with id " + userId + " was not found.");
+    }
+    Roles role = rolesRepo.getOne(roleId);
+    Users user = usersRepo.getOne(userId);
+    user.addRole(role);
+    usersRepo.save(user);
+    return "Role with id " + roleId + " was assigned to user with id " + userId;
+  }
+
+  @Override
+  public String removeRoleFromUser(Long userId, Long roleId) {
+    if (rolesRepo.findById(roleId).isEmpty()) {
+      throw new RoleNotFoundException(roleId);
+    }
+    if (usersRepo.findById(userId).isEmpty()) {
+      throw new RoleNotFoundException(
+          "The roles could not be removed. User with id " + userId + " does not exist.");
+    }
+    Users user = usersRepo.findById(userId).get();
+    Roles roleToRemove = rolesRepo.getOne(roleId);
+    if (user.getRoles().contains(roleToRemove)) {
+      user.removeRole(roleToRemove);
+      usersRepo.save(user);
+      return "Role with id " + roleId + " was removed from user with id " + userId;
+    } else {
+      throw new RoleNotFoundException(
+          "The user with id " + userId + " was not assigned to the role with id " + roleId);
+    }
+  }
+
+  @Override
+  public List<RolesDTO> getRolesForUser(Long userId) {
+    List<RolesDTO> rolesForUser = new ArrayList<>();
+    if (usersRepo.findById(userId).isEmpty()) {
+      throw new RoleNotFoundException(
+          "Roles for the user could not be found. User " + userId + " does not exist.");
+    }
+    Set<Roles> roles = usersRepo.getOne(userId).getRoles();
+    for (Roles role : roles) {
+      rolesForUser.add(convertToRolesDTO(role));
+    }
+    return rolesForUser;
+  }
+
   private UsersDTO convertToUserDTO(Users user) {
-    return new UsersDTO(user.getId(), user.getUserName(), user.getEmail(), user.getCreatedAt());
+    UsersDTO dto = new UsersDTO();
+    dto.setId(user.getId());
+    dto.setUserName(user.getUserName());
+    dto.setEmail(user.getEmail());
+    dto.setCreatedAt(user.getCreatedAt());
+    return dto;
+  }
+
+  private RolesDTO convertToRolesDTO(Roles role) {
+    RolesDTO dto = new RolesDTO();
+    dto.setId(role.getId());
+    dto.setRole(role.getRole());
+    dto.setDescription(role.getDescription());
+    return dto;
   }
 }

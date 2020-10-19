@@ -1,6 +1,7 @@
 package se.melindasw.relaywriter.auth;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import se.melindasw.relaywriter.users.Users;
 
 import javax.persistence.*;
@@ -8,7 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Roles {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,13 +21,18 @@ public class Roles {
 
   private String description;
 
-  @ManyToMany(mappedBy = "roles")
-  private Set<Users> users = new HashSet<>();
+  @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+  private Set<Users> users;
 
   public Roles() {}
 
   public Roles(String role, String description) {
     this.role = role;
     this.description = description;
+    instantiateSets();
+  }
+
+  private void instantiateSets() {
+    users = new HashSet<>();
   }
 }

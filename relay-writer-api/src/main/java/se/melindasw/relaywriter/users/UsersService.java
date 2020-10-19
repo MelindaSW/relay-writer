@@ -1,5 +1,7 @@
 package se.melindasw.relaywriter.users;
 
+import se.melindasw.relaywriter.auth.RolesDTO;
+
 import java.util.List;
 
 public interface UsersService {
@@ -18,4 +20,10 @@ public interface UsersService {
   boolean checkUserNameExists(String userName);
 
   boolean checkEmailExists(String email);
+
+  String assignRoleToUser(Long userId, Long roleId);
+
+  String removeRoleFromUser(Long userId, Long roleId);
+
+  List<RolesDTO> getRolesForUser(Long userId);
 }

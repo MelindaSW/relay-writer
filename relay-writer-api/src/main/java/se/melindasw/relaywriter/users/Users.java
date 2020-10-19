@@ -1,6 +1,7 @@
 package se.melindasw.relaywriter.users;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import se.melindasw.relaywriter.auth.Roles;
 
 import javax.persistence.*;
@@ -9,7 +10,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Users {
 
   @Id
@@ -28,12 +30,12 @@ public class Users {
   @Column(nullable = false)
   private LocalDateTime createdAt;
 
-  @ManyToMany(cascade = {CascadeType.ALL})
+  @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(
       name = "users_roles",
-      joinColumns = {@JoinColumn(name = "roles_id")},
-      inverseJoinColumns = {@JoinColumn(name = "users_id")})
-  private Set<Roles> roles = new HashSet<>();
+      joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
+      inverseJoinColumns = {@JoinColumn(name = "roles_id", referencedColumnName = "id")})
+  private Set<Roles> roles;
 
   public Users() {}
 
@@ -42,13 +44,20 @@ public class Users {
     this.email = email;
     this.password = password;
     this.createdAt = createdAt;
+    instantiateSets();
   }
 
-  public Users(Long id, String userName, String email, String password, LocalDateTime createdAt) {
-    this.id = id;
-    this.userName = userName;
-    this.email = email;
-    this.password = password;
-    this.createdAt = createdAt;
+  public void instantiateSets() {
+    roles = new HashSet<>();
+  }
+
+  public void addRole(Roles role) {
+    roles.add(role);
+    role.getUsers().add(this);
+  }
+
+  public void removeRole(Roles role) {
+    roles.remove(role);
+    role.getUsers().remove(this);
   }
 }
