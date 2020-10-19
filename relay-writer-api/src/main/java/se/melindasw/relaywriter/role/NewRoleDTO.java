@@ -1,9 +1,9 @@
-package se.melindasw.relaywriter.auth;
+package se.melindasw.relaywriter.role;
 
 import lombok.Data;
 
 @Data
-public class NewRolesDTO {
+public class NewRoleDTO {
   String role;
   String description;
 }

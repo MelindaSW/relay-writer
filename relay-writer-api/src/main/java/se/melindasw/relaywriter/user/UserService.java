@@ -1,19 +1,19 @@
-package se.melindasw.relaywriter.users;
+package se.melindasw.relaywriter.user;
 
-import se.melindasw.relaywriter.auth.RolesDTO;
+import se.melindasw.relaywriter.role.RoleDTO;
 
 import java.util.List;
 
-public interface UsersService {
-  UsersDTO addUser(NewUserDTO user);
+public interface UserService {
+  UserDTO addUser(NewUserDTO user);
 
   String deleteUser(Long userID);
 
-  List<UsersDTO> getAllUsers();
+  List<UserDTO> getAllUsers();
 
-  UsersDTO getUserByID(Long userID);
+  UserDTO getUserByID(Long userID);
 
-  UsersDTO updateUser(UsersDTO user);
+  UserDTO updateUser(UserDTO user);
 
   String changePassword(Long userId, String oldPassword, String newPassword);
 
@@ -25,5 +25,5 @@ public interface UsersService {
 
   String removeRoleFromUser(Long userId, Long roleId);
 
-  List<RolesDTO> getRolesForUser(Long userId);
+  List<RoleDTO> getRolesForUser(Long userId);
 }

@@ -1,50 +1,50 @@
-package se.melindasw.relaywriter.users;
+package se.melindasw.relaywriter.user;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.melindasw.relaywriter.auth.RolesDTO;
 import se.melindasw.relaywriter.exceptions.IncorrectRequestException;
+import se.melindasw.relaywriter.role.RoleDTO;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-public class UsersController {
+public class UserController {
 
-  private final UsersService service;
+  private final UserService service;
 
   @Autowired
-  public UsersController(UsersService service) {
+  public UserController(UserService service) {
     this.service = service;
   }
 
   @ApiOperation(value = "Adds one new user", response = ResponseEntity.class)
   @PostMapping("/add")
-  public ResponseEntity<UsersDTO> addUser(@RequestBody final NewUserDTO newUser) {
+  public ResponseEntity<UserDTO> addUser(@RequestBody final NewUserDTO newUser) {
     if (newUser.getUserName() == null
         || newUser.getEmail() == null
         || newUser.getPassword() == null) {
       throw new IncorrectRequestException();
     }
-    ResponseEntity<UsersDTO> response =
+    ResponseEntity<UserDTO> response =
         new ResponseEntity(service.addUser(newUser), HttpStatus.CREATED);
     return response;
   }
 
   @ApiOperation(value = "Returns a list of all users", response = ResponseEntity.class)
   @GetMapping("/get-all")
-  public ResponseEntity<List<UsersDTO>> getAllUsers() {
-    List<UsersDTO> allUsers = service.getAllUsers();
+  public ResponseEntity<List<UserDTO>> getAllUsers() {
+    List<UserDTO> allUsers = service.getAllUsers();
     return new ResponseEntity<>(allUsers, HttpStatus.OK);
   }
 
   @ApiOperation(value = "Returns one user", response = ResponseEntity.class)
   @GetMapping("/get-one/{userId}")
-  public ResponseEntity<UsersDTO> getOneUser(@PathVariable Long userId) {
-    UsersDTO user = service.getUserByID(userId);
+  public ResponseEntity<UserDTO> getOneUser(@PathVariable Long userId) {
+    UserDTO user = service.getUserByID(userId);
     return new ResponseEntity<>(user, HttpStatus.OK);
   }
 
@@ -57,8 +57,8 @@ public class UsersController {
 
   @ApiOperation(value = "Update one user", response = ResponseEntity.class)
   @PutMapping("/update")
-  public ResponseEntity<UsersDTO> updateUser(@RequestBody UsersDTO user) {
-    UsersDTO updatedUser = service.updateUser(user);
+  public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO user) {
+    UserDTO updatedUser = service.updateUser(user);
     return new ResponseEntity<>(updatedUser, HttpStatus.CREATED);
   }
 
@@ -112,8 +112,8 @@ public class UsersController {
 
   @ApiOperation(value = "Get a list of all roles for one user", response = ResponseEntity.class)
   @GetMapping("/user-roles/{userId}")
-  public ResponseEntity<List<RolesDTO>> getRolesForUser(@PathVariable Long userId) {
-    List<RolesDTO> rolesForUser = service.getRolesForUser(userId);
+  public ResponseEntity<List<RoleDTO>> getRolesForUser(@PathVariable Long userId) {
+    List<RoleDTO> rolesForUser = service.getRolesForUser(userId);
     return new ResponseEntity<>(rolesForUser, HttpStatus.OK);
   }
 }

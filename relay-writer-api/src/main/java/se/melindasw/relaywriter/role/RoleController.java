@@ -1,4 +1,4 @@
-package se.melindasw.relaywriter.auth;
+package se.melindasw.relaywriter.role;
 
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,24 +10,24 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/roles")
-public class RolesController {
+public class RoleController {
 
-  private RolesService service;
+  private RoleService service;
 
   @Autowired
-  public RolesController(RolesService service) {
+  public RoleController(RoleService service) {
     this.service = service;
   }
 
   @ApiOperation(value = "Get a list of all roles", response = ResponseEntity.class)
   @GetMapping("/all")
-  public ResponseEntity<List<RolesDTO>> getRoles() {
+  public ResponseEntity<List<RoleDTO>> getRoles() {
     return new ResponseEntity<>(service.getAllRoles(), HttpStatus.OK);
   }
 
   @ApiOperation(value = "Add new role", response = ResponseEntity.class)
   @PutMapping("/add")
-  public ResponseEntity<String> addRole(@RequestBody NewRolesDTO newRole) {
+  public ResponseEntity<String> addRole(@RequestBody NewRoleDTO newRole) {
     String response = service.addNewRole(newRole);
     return new ResponseEntity<>(response, HttpStatus.CREATED);
   }
@@ -41,8 +41,8 @@ public class RolesController {
 
   @ApiOperation(value = "Update one role", response = ResponseEntity.class)
   @PutMapping("/update")
-  public ResponseEntity<RolesDTO> updateRole(@RequestBody RolesDTO rolesDTO) {
-    RolesDTO updateRole = service.updateRole(rolesDTO);
+  public ResponseEntity<RoleDTO> updateRole(@RequestBody RoleDTO roleDTO) {
+    RoleDTO updateRole = service.updateRole(roleDTO);
     return new ResponseEntity<>(updateRole, HttpStatus.CREATED);
   }
 }

@@ -1,31 +1,31 @@
-package se.melindasw.relaywriter.users;
+package se.melindasw.relaywriter.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.melindasw.relaywriter.auth.Roles;
-import se.melindasw.relaywriter.auth.RolesDTO;
-import se.melindasw.relaywriter.auth.RolesRepo;
 import se.melindasw.relaywriter.exceptions.RoleNotFoundException;
 import se.melindasw.relaywriter.exceptions.UserNotFoundException;
+import se.melindasw.relaywriter.role.Role;
+import se.melindasw.relaywriter.role.RoleDTO;
+import se.melindasw.relaywriter.role.RoleRepo;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Service
-public class UsersServiceImplementation implements UsersService {
-  private final UsersRepo usersRepo;
-  private final RolesRepo rolesRepo;
+public class UserServiceImplementation implements UserService {
+  private final UserRepo usersRepo;
+  private final RoleRepo roleRepo;
 
   @Autowired
-  public UsersServiceImplementation(UsersRepo usersRepo, RolesRepo rolesRepo) {
+  public UserServiceImplementation(UserRepo usersRepo, RoleRepo roleRepo) {
     this.usersRepo = usersRepo;
-    this.rolesRepo = rolesRepo;
+    this.roleRepo = roleRepo;
   }
 
   @Override
-  public UsersDTO addUser(NewUserDTO newUser) {
-    Users user = new Users();
+  public UserDTO addUser(NewUserDTO newUser) {
+    User user = new User();
     user.setUserName(newUser.getUserName());
     user.setPassword(newUser.getPassword());
     user.setEmail(newUser.getEmail());
@@ -35,10 +35,10 @@ public class UsersServiceImplementation implements UsersService {
   }
 
   @Override
-  public List<UsersDTO> getAllUsers() {
-    List<Users> allUsers = usersRepo.findAll();
-    List<UsersDTO> allUsersDTO = new ArrayList<>();
-    for (Users user : allUsers) {
+  public List<UserDTO> getAllUsers() {
+    List<User> allUsers = usersRepo.findAll();
+    List<UserDTO> allUsersDTO = new ArrayList<>();
+    for (User user : allUsers) {
       allUsersDTO.add(convertToUserDTO(user));
     }
     return allUsersDTO;
@@ -55,8 +55,8 @@ public class UsersServiceImplementation implements UsersService {
   }
 
   @Override
-  public UsersDTO getUserByID(Long userID) {
-    Users user;
+  public UserDTO getUserByID(Long userID) {
+    User user;
     if (usersRepo.findById(userID).isPresent()) {
       user = usersRepo.getOne(userID);
       return convertToUserDTO(user);
@@ -66,9 +66,9 @@ public class UsersServiceImplementation implements UsersService {
   }
 
   @Override
-  public UsersDTO updateUser(UsersDTO user) {
+  public UserDTO updateUser(UserDTO user) {
     if (usersRepo.findById(user.getId()).isPresent()) {
-      Users userToUpdate = usersRepo.findById(user.getId()).get();
+      User userToUpdate = usersRepo.findById(user.getId()).get();
       userToUpdate.setEmail(user.getEmail());
       userToUpdate.setUserName(user.getUserName());
       usersRepo.save(userToUpdate);
@@ -82,7 +82,7 @@ public class UsersServiceImplementation implements UsersService {
   public String changePassword(Long userId, String oldPassword, String newPassword) {
     if (usersRepo.findById(userId).isPresent()) {
       if (usersRepo.findById(userId).get().getPassword().equals(oldPassword)) {
-        Users userToUpdate = usersRepo.findById(userId).get();
+        User userToUpdate = usersRepo.findById(userId).get();
         userToUpdate.setPassword(newPassword);
         usersRepo.save(userToUpdate);
         return "Password updated";
@@ -95,26 +95,26 @@ public class UsersServiceImplementation implements UsersService {
 
   @Override
   public boolean checkUserNameExists(String userName) {
-    List<Users> u = usersRepo.findByUserName(userName);
+    List<User> u = usersRepo.findByUserName(userName);
     return !u.isEmpty();
   }
 
   @Override
   public boolean checkEmailExists(String email) {
-    List<Users> u = usersRepo.findByEmail(email);
+    List<User> u = usersRepo.findByEmail(email);
     return !u.isEmpty();
   }
 
   @Override
   public String assignRoleToUser(Long userId, Long roleId) {
-    if (rolesRepo.findById(roleId).isEmpty()) {
+    if (roleRepo.findById(roleId).isEmpty()) {
       throw new RoleNotFoundException(roleId);
     }
     if (usersRepo.findById(userId).isEmpty()) {
       throw new RoleNotFoundException("The user with id " + userId + " was not found.");
     }
-    Roles role = rolesRepo.getOne(roleId);
-    Users user = usersRepo.getOne(userId);
+    Role role = roleRepo.getOne(roleId);
+    User user = usersRepo.getOne(userId);
     user.addRole(role);
     usersRepo.save(user);
     return "Role with id " + roleId + " was assigned to user with id " + userId;
@@ -122,15 +122,15 @@ public class UsersServiceImplementation implements UsersService {
 
   @Override
   public String removeRoleFromUser(Long userId, Long roleId) {
-    if (rolesRepo.findById(roleId).isEmpty()) {
+    if (roleRepo.findById(roleId).isEmpty()) {
       throw new RoleNotFoundException(roleId);
     }
     if (usersRepo.findById(userId).isEmpty()) {
       throw new RoleNotFoundException(
           "The roles could not be removed. User with id " + userId + " does not exist.");
     }
-    Users user = usersRepo.findById(userId).get();
-    Roles roleToRemove = rolesRepo.getOne(roleId);
+    User user = usersRepo.findById(userId).get();
+    Role roleToRemove = roleRepo.getOne(roleId);
     if (user.getRoles().contains(roleToRemove)) {
       user.removeRole(roleToRemove);
       usersRepo.save(user);
@@ -142,21 +142,21 @@ public class UsersServiceImplementation implements UsersService {
   }
 
   @Override
-  public List<RolesDTO> getRolesForUser(Long userId) {
-    List<RolesDTO> rolesForUser = new ArrayList<>();
+  public List<RoleDTO> getRolesForUser(Long userId) {
+    List<RoleDTO> rolesForUser = new ArrayList<>();
     if (usersRepo.findById(userId).isEmpty()) {
       throw new RoleNotFoundException(
           "Roles for the user could not be found. User " + userId + " does not exist.");
     }
-    Set<Roles> roles = usersRepo.getOne(userId).getRoles();
-    for (Roles role : roles) {
+    Set<Role> roles = usersRepo.getOne(userId).getRoles();
+    for (Role role : roles) {
       rolesForUser.add(convertToRolesDTO(role));
     }
     return rolesForUser;
   }
 
-  private UsersDTO convertToUserDTO(Users user) {
-    UsersDTO dto = new UsersDTO();
+  private UserDTO convertToUserDTO(User user) {
+    UserDTO dto = new UserDTO();
     dto.setId(user.getId());
     dto.setUserName(user.getUserName());
     dto.setEmail(user.getEmail());
@@ -164,8 +164,8 @@ public class UsersServiceImplementation implements UsersService {
     return dto;
   }
 
-  private RolesDTO convertToRolesDTO(Roles role) {
-    RolesDTO dto = new RolesDTO();
+  private RoleDTO convertToRolesDTO(Role role) {
+    RoleDTO dto = new RoleDTO();
     dto.setId(role.getId());
     dto.setRole(role.getRole());
     dto.setDescription(role.getDescription());

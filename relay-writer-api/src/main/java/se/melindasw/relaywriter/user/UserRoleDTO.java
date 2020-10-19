@@ -1,4 +1,4 @@
-package se.melindasw.relaywriter.users;
+package se.melindasw.relaywriter.user;
 
 import lombok.Data;
 

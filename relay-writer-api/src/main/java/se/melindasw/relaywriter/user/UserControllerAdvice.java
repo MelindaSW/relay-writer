@@ -1,4 +1,4 @@
-package se.melindasw.relaywriter.users;
+package se.melindasw.relaywriter.user;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import se.melindasw.relaywriter.exceptions.UserNotFoundException;
 
 @ControllerAdvice
-public class UsersControllerAdvice {
+public class UserControllerAdvice {
   @ResponseBody
   @ExceptionHandler(UserNotFoundException.class)
   @ResponseStatus(HttpStatus.NOT_FOUND)
