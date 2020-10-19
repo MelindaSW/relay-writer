@@ -21,36 +21,28 @@ public class RolesController {
 
   @ApiOperation(value = "Get a list of all roles", response = ResponseEntity.class)
   @GetMapping("/all")
-  public ResponseEntity<List<Roles>> getRoles() {
-    // TODO
-    return null;
+  public ResponseEntity<List<RolesDTO>> getRoles() {
+    return new ResponseEntity<>(service.getAllRoles(), HttpStatus.OK);
   }
 
   @ApiOperation(value = "Add new role", response = ResponseEntity.class)
   @PutMapping("/add")
-  public ResponseEntity<String> addRole(@RequestBody Long roleId, Long userId) {
-    // TODO
-    return new ResponseEntity<>("Role added", HttpStatus.OK);
+  public ResponseEntity<String> addRole(@RequestBody NewRolesDTO newRole) {
+    String response = service.addNewRole(newRole);
+    return new ResponseEntity<>(response, HttpStatus.CREATED);
   }
 
   @ApiOperation(value = "Delete one role", response = ResponseEntity.class)
   @DeleteMapping("/delete/{roleId}")
   public ResponseEntity<String> deleteRole(@PathVariable Long roleId) {
-    // TODO
-    return new ResponseEntity<>("Role removed from user", HttpStatus.OK);
+    String response = service.deleteRole(roleId);
+    return new ResponseEntity<>(response, HttpStatus.OK);
   }
 
-  @ApiOperation(value = "Add role to one user", response = ResponseEntity.class)
-  @PutMapping("/add-to-user")
-  public ResponseEntity<String> addRoleToUser(@RequestBody Long userId, Long roleId) {
-    // TODO
-    return new ResponseEntity<>("Role added to user", HttpStatus.OK);
-  }
-
-  @ApiOperation(value = "Get a list of all roles for one user", response = ResponseEntity.class)
-  @GetMapping("/user-roles/{userId}")
-  public ResponseEntity<List<Roles>> getRolesForUser(@PathVariable Long userId) {
-    // TODO
-    return null;
+  @ApiOperation(value = "Update one role", response = ResponseEntity.class)
+  @PutMapping("/update")
+  public ResponseEntity<RolesDTO> updateRole(@RequestBody RolesDTO rolesDTO) {
+    RolesDTO updateRole = service.updateRole(rolesDTO);
+    return new ResponseEntity<>(updateRole, HttpStatus.CREATED);
   }
 }

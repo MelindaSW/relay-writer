@@ -1,36 +1,65 @@
 package se.melindasw.relaywriter.auth;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import se.melindasw.relaywriter.users.UsersDTO;
+import se.melindasw.relaywriter.exceptions.RoleNotFoundException;
+import se.melindasw.relaywriter.users.UsersRepo;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class RolesServiceImplementation implements RolesService {
 
-  @Override
-  public String addNewRole(String role) {
-    return null;
+  private final RolesRepo rolesRepo;
+  private final UsersRepo usersRepo;
+
+  @Autowired
+  public RolesServiceImplementation(RolesRepo rolesRepo, UsersRepo usersRepo) {
+    this.rolesRepo = rolesRepo;
+    this.usersRepo = usersRepo;
   }
 
   @Override
-  public Set<Roles> addRoleToUser(Long userID, String role) {
-    return null;
+  public List<RolesDTO> getAllRoles() {
+    List<Roles> roles = rolesRepo.findAll();
+    List<RolesDTO> rolesDTOS = new ArrayList<>();
+    for (Roles role : roles) {
+      rolesDTOS.add(convertToRolesDTO(role));
+    }
+    return rolesDTOS;
   }
 
   @Override
-  public Set<Roles> removeRoleFromUser(Long userID, String role) {
-    return null;
-  }
-
-  @Override
-  public List<UsersDTO> getRolesForUser(Long userID) {
-    return null;
+  public String addNewRole(NewRolesDTO role) {
+    Roles roleToSave = new Roles(role.getRole().toUpperCase(), role.getDescription());
+    rolesRepo.save(roleToSave);
+    return "Role: " + role.getRole() + " was added.";
   }
 
   @Override
   public String deleteRole(Long roleId) {
-    return null;
+    if (rolesRepo.findById(roleId).isEmpty()) {
+      throw new RoleNotFoundException(roleId);
+    }
+    rolesRepo.deleteById(roleId);
+    return "Role with id " + roleId + " was deleted.";
+  }
+
+  @Override
+  public RolesDTO updateRole(RolesDTO rolesDTO) {
+    Roles role = rolesRepo.getOne(rolesDTO.getId());
+    role.setRole(rolesDTO.getRole().toUpperCase());
+    role.setDescription(rolesDTO.getDescription());
+    rolesRepo.save(role);
+    return convertToRolesDTO(role);
+  }
+
+  private RolesDTO convertToRolesDTO(Roles role) {
+    RolesDTO dto = new RolesDTO();
+    dto.setId(role.getId());
+    dto.setRole(role.getRole());
+    dto.setDescription(role.getDescription());
+    return dto;
   }
 }

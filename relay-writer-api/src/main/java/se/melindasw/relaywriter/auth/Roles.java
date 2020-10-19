@@ -19,7 +19,7 @@ public class Roles {
 
   private String description;
 
-  @ManyToMany(mappedBy = "roles", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+  @ManyToMany(mappedBy = "roles")
   private Set<Users> users = new HashSet<>();
 
   public Roles() {}
