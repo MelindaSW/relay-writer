@@ -3,7 +3,6 @@ package se.melindasw.relaywriter.user;
 import lombok.Getter;
 import lombok.Setter;
 import se.melindasw.relaywriter.role.Role;
-import se.melindasw.relaywriter.story.Story;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -41,9 +40,6 @@ public class User {
       inverseJoinColumns = {@JoinColumn(name = "roles_id", referencedColumnName = "id")})
   private Set<Role> roles;
 
-  @OneToMany(mappedBy = "creator")
-  private Set<Story> stories;
-
   public User() {}
 
   public User(String userName, String email, String password, LocalDateTime createdAt) {
@@ -52,7 +48,6 @@ public class User {
     this.password = password;
     this.createdAt = createdAt;
     roles = new HashSet<>();
-    stories = new HashSet<>();
   }
 
   public void addRole(Role role) {

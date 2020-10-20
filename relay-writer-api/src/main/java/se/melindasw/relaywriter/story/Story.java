@@ -2,15 +2,12 @@ package se.melindasw.relaywriter.story;
 
 import lombok.Getter;
 import lombok.Setter;
-import se.melindasw.relaywriter.snippet.Snippet;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import se.melindasw.relaywriter.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-
-import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Getter
@@ -28,10 +25,8 @@ public class Story {
 
   @ManyToOne
   @JoinColumn(name = "user_id")
+  @OnDelete(action = OnDeleteAction.CASCADE)
   private User creator;
-
-  @OneToMany(cascade = ALL, mappedBy = "story")
-  private Set<Snippet> snippets;
 
   public Story() {}
 
@@ -40,10 +35,5 @@ public class Story {
     this.title = title;
     this.description = description;
     this.creator = creator;
-    snippets = new HashSet<>();
-  }
-
-  public void addSnippet(Snippet newSnippet) {
-    snippets.add(newSnippet);
   }
 }

@@ -1,17 +1,16 @@
 package se.melindasw.relaywriter.story;
 
-import se.melindasw.relaywriter.snippet.SnippetDTO;
-
 import java.util.List;
 
 public interface StoryService {
+
+  StoryDTO addStory(NewStoryDTO newStoryDTO);
+
   List<StoryDTO> getAllStories();
 
-  StoryDTO addStory();
-
-  StoryDTO updateStory(StoryDTO dto);
+  StoryDTO updateStory(UpdateStoryDTO storyDTO);
 
   String deleteStory(Long storyId);
 
-  String addSnippetToStory(SnippetDTO newSnippet);
+  List<StoryDTO> getAllStoriesForUser(Long userId);
 }
