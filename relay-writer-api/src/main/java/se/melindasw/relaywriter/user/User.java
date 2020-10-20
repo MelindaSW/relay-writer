@@ -10,9 +10,12 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.ALL;
+
 @Entity
 @Getter
 @Setter
+@Table(name = "users")
 public class User {
 
   @Id
@@ -31,15 +34,14 @@ public class User {
   @Column(nullable = false)
   private LocalDateTime createdAt;
 
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany(cascade = ALL)
   @JoinTable(
       name = "users_roles",
       joinColumns = {@JoinColumn(name = "users_id", referencedColumnName = "id")},
       inverseJoinColumns = {@JoinColumn(name = "roles_id", referencedColumnName = "id")})
   private Set<Role> roles;
 
-  @OneToMany
-  @JoinColumn(name = "user_fk")
+  @OneToMany(mappedBy = "creator")
   private Set<Story> stories;
 
   public User() {}

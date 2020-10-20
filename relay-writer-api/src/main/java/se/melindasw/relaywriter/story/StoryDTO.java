@@ -1,8 +1,8 @@
 package se.melindasw.relaywriter.story;
 
 import lombok.Data;
-import se.melindasw.relaywriter.snippet.Snippet;
-import se.melindasw.relaywriter.user.User;
+import se.melindasw.relaywriter.snippet.SnippetDTO;
+import se.melindasw.relaywriter.user.UserDTO;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -13,6 +13,6 @@ public class StoryDTO {
   LocalDateTime createdAt;
   String title;
   String description;
-  User creator;
-  Set<Snippet> snippets;
+  UserDTO creator;
+  Set<SnippetDTO> snippets;
 }

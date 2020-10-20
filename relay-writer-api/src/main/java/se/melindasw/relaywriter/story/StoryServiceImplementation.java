@@ -40,4 +40,21 @@ public class StoryServiceImplementation implements StoryService {
   public String addSnippetToStory(SnippetDTO newSnippet) {
     return null;
   }
+
+  private Story convertToStory(StoryDTO dto) {
+    Story story = new Story();
+    story.setCreatedAt(dto.getCreatedAt());
+    story.setDescription(dto.getDescription());
+    story.setTitle(dto.getTitle());
+    return story;
+  }
+
+  private StoryDTO convertToStoryDTO(Story story) {
+    StoryDTO dto = new StoryDTO();
+    dto.setId(story.getId());
+    dto.setCreatedAt(story.getCreatedAt());
+    dto.setTitle(story.getTitle());
+    dto.setDescription(story.getDescription());
+    return dto;
+  }
 }
