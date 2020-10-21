@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {LoginPage} from '../views';
+import {LoginPage} from '../../views';
 
 export default {
     title: 'Views/Login',

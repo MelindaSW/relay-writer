@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Generates a directory with files for the component mentioned in the second argument. 
-# Story file in mdx format is adapted for a basic component documentation i addon-docs.
-
 # Pass the name of the folder (existing or non-existing) as first argument 
 # and the name of the component as the second argument
 # Trying to create directory/directories that already exists will print a warning
@@ -18,7 +15,7 @@ name=$2
 dirPath=$dir/$name
 
 componentFile=./$dirPath/$name.jsx
-storyFile=./$dirPath/$name.stories.mdx
+storyFile=./$dirPath/$name.stories.jsx
 testFile=./$dirPath/$name.test.js
 
 [ -d $dirPath ] && echo "Directory "$dirPath" already exists" && echo && exit 1
@@ -51,28 +48,14 @@ describe('"$name" Default ', () => {
 });" >> $testFile
 
 
-echo "import { storiesOf } from '@storybook/react'
-import { boolean, text } from '@storybook/addon-knobs'
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks'
-import { "$name" } from '"$dir"'
+echo "import { storiesOf } from '@storybook/react';
+import { "$name"Default } from './"$name"';
 
-<Meta title=\""$dir"|"$name"\" component={"$name"} />
-
-# "$name"
-
-## Subtitle
-
-### Description
-
-<Preview withToolbar>
-   <Story name=\"default\">
-      <"$name" />
-   </Story>
-</Preview>
-
-## Props
-
-<Props of={"$name"} />" >> $storyFile
+storiesOf('"$dir"|"$name"', module)
+.addParameters({ jest: ['"$name"'] })
+.add('Default', () => {
+    return "$name"Default();
+});" >> $storyFile
 
 
 echo "Added content to the "$name" files"
