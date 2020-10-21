@@ -1,11 +1,12 @@
 package se.melindasw.relaywriter.story;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import se.melindasw.relaywriter.exceptions.StoryNotFoundException;
+import se.melindasw.relaywriter.helpers.DTOConverter;
 import se.melindasw.relaywriter.snippet.SnippetRepo;
 import se.melindasw.relaywriter.user.User;
-import se.melindasw.relaywriter.user.UserDTO;
 import se.melindasw.relaywriter.user.UserRepo;
 
 import javax.persistence.EntityNotFoundException;
@@ -14,6 +15,8 @@ import java.util.List;
 
 @Service
 public class StoryServiceImplementation implements StoryService {
+
+  DTOConverter dtoConverter = new DTOConverter();
 
   private StoryRepo storyRepo;
   private UserRepo userRepo;
@@ -39,7 +42,7 @@ public class StoryServiceImplementation implements StoryService {
     story.setDescription(dto.getDescription());
     story.setCreatedAt(dto.getCreatedAt());
     storyRepo.save(story);
-    return convertToStoryDTO(story);
+    return dtoConverter.convertToStoryDTO(story);
   }
 
   @Override
@@ -52,7 +55,7 @@ public class StoryServiceImplementation implements StoryService {
     story.setDescription(dto.getDescription());
     story.setTitle(dto.getTitle());
     storyRepo.save(story);
-    return convertToStoryDTO(story);
+    return dtoConverter.convertToStoryDTO(story);
   }
 
   @Override
@@ -73,7 +76,7 @@ public class StoryServiceImplementation implements StoryService {
     List<Story> allStoriesForUser = storyRepo.findAllByCreator(creator);
     List<StoryDTO> response = new ArrayList<>();
     for (Story story : allStoriesForUser) {
-      response.add(convertToStoryDTO(story));
+      response.add(dtoConverter.convertToStoryDTO(story));
     }
     return response;
   }
@@ -81,39 +84,10 @@ public class StoryServiceImplementation implements StoryService {
   @Override
   public List<StoryDTO> getAllStories() {
     List<StoryDTO> allStories = new ArrayList<>();
-    List<Story> stories = storyRepo.findAll();
+    List<Story> stories = storyRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     for (Story story : stories) {
-      allStories.add(convertToStoryDTO(story));
+      allStories.add(dtoConverter.convertToStoryDTO(story));
     }
     return allStories;
-  }
-
-  private Story convertToStory(StoryDTO dto) {
-    Story story = new Story();
-    story.setCreatedAt(dto.getCreatedAt());
-    story.setDescription(dto.getDescription());
-    story.setTitle(dto.getTitle());
-
-    return story;
-  }
-
-  private StoryDTO convertToStoryDTO(Story story) {
-    StoryDTO dto = new StoryDTO();
-    dto.setId(story.getId());
-    dto.setCreatedAt(story.getCreatedAt());
-    dto.setTitle(story.getTitle());
-    dto.setDescription(story.getDescription());
-    UserDTO creator = convertToUserDTO(story.getCreator());
-    dto.setCreator(creator);
-    return dto;
-  }
-
-  private UserDTO convertToUserDTO(User user) {
-    UserDTO dto = new UserDTO();
-    dto.setId(user.getId());
-    dto.setCreatedAt(user.getCreatedAt());
-    dto.setEmail(user.getEmail());
-    dto.setUserName(user.getUserName());
-    return dto;
   }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.melindasw.relaywriter.exceptions.RoleNotFoundException;
 import se.melindasw.relaywriter.exceptions.UserNotFoundException;
+import se.melindasw.relaywriter.helpers.DTOConverter;
 import se.melindasw.relaywriter.role.Role;
 import se.melindasw.relaywriter.role.RoleDTO;
 import se.melindasw.relaywriter.role.RoleRepo;
@@ -14,6 +15,9 @@ import java.util.Set;
 
 @Service
 public class UserServiceImplementation implements UserService {
+
+  DTOConverter converter = new DTOConverter();
+
   private final UserRepo usersRepo;
   private final RoleRepo roleRepo;
 
@@ -31,7 +35,7 @@ public class UserServiceImplementation implements UserService {
     user.setEmail(newUser.getEmail());
     user.setCreatedAt(newUser.getCreatedAt());
     usersRepo.save(user);
-    return convertToUserDTO(user);
+    return converter.convertToUserDTO(user);
   }
 
   @Override
@@ -39,7 +43,7 @@ public class UserServiceImplementation implements UserService {
     List<User> allUsers = usersRepo.findAll();
     List<UserDTO> allUsersDTO = new ArrayList<>();
     for (User user : allUsers) {
-      allUsersDTO.add(convertToUserDTO(user));
+      allUsersDTO.add(converter.convertToUserDTO(user));
     }
     return allUsersDTO;
   }
@@ -59,7 +63,7 @@ public class UserServiceImplementation implements UserService {
     User user;
     if (usersRepo.findById(userID).isPresent()) {
       user = usersRepo.getOne(userID);
-      return convertToUserDTO(user);
+      return converter.convertToUserDTO(user);
     } else {
       throw new UserNotFoundException(userID);
     }
@@ -72,7 +76,7 @@ public class UserServiceImplementation implements UserService {
       userToUpdate.setEmail(user.getEmail());
       userToUpdate.setUserName(user.getUserName());
       usersRepo.save(userToUpdate);
-      return convertToUserDTO(userToUpdate);
+      return converter.convertToUserDTO(userToUpdate);
     } else {
       throw new UserNotFoundException(user.getId());
     }
@@ -150,25 +154,8 @@ public class UserServiceImplementation implements UserService {
     }
     Set<Role> roles = usersRepo.getOne(userId).getRoles();
     for (Role role : roles) {
-      rolesForUser.add(convertToRolesDTO(role));
+      rolesForUser.add(converter.convertToRoleDTO(role));
     }
     return rolesForUser;
-  }
-
-  private UserDTO convertToUserDTO(User user) {
-    UserDTO dto = new UserDTO();
-    dto.setId(user.getId());
-    dto.setUserName(user.getUserName());
-    dto.setEmail(user.getEmail());
-    dto.setCreatedAt(user.getCreatedAt());
-    return dto;
-  }
-
-  private RoleDTO convertToRolesDTO(Role role) {
-    RoleDTO dto = new RoleDTO();
-    dto.setId(role.getId());
-    dto.setRole(role.getRole());
-    dto.setDescription(role.getDescription());
-    return dto;
   }
 }

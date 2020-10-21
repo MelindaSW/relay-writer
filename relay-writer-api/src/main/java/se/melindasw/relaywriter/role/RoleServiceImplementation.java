@@ -3,6 +3,7 @@ package se.melindasw.relaywriter.role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.melindasw.relaywriter.exceptions.RoleNotFoundException;
+import se.melindasw.relaywriter.helpers.DTOConverter;
 import se.melindasw.relaywriter.user.UserRepo;
 
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import java.util.List;
 
 @Service
 public class RoleServiceImplementation implements RoleService {
+
+  DTOConverter converter = new DTOConverter();
 
   private final RoleRepo roleRepo;
   private final UserRepo userRepo;
@@ -25,7 +28,7 @@ public class RoleServiceImplementation implements RoleService {
     List<Role> roles = roleRepo.findAll();
     List<RoleDTO> roleDTOS = new ArrayList<>();
     for (Role role : roles) {
-      roleDTOS.add(convertToRolesDTO(role));
+      roleDTOS.add(converter.convertToRoleDTO(role));
     }
     return roleDTOS;
   }
@@ -52,14 +55,6 @@ public class RoleServiceImplementation implements RoleService {
     role.setRole(roleDTO.getRole().toUpperCase());
     role.setDescription(roleDTO.getDescription());
     roleRepo.save(role);
-    return convertToRolesDTO(role);
-  }
-
-  private RoleDTO convertToRolesDTO(Role role) {
-    RoleDTO dto = new RoleDTO();
-    dto.setId(role.getId());
-    dto.setRole(role.getRole());
-    dto.setDescription(role.getDescription());
-    return dto;
+    return converter.convertToRoleDTO(role);
   }
 }

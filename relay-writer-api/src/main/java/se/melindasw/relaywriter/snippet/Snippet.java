@@ -7,7 +7,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import se.melindasw.relaywriter.story.Story;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -18,7 +18,7 @@ public class Snippet {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private Date createdAt;
+  private LocalDateTime createdAt;
   private String snippet;
   private String author;
 
