@@ -1,12 +1,13 @@
 const userState = {
-  id: 0,
-  name: 'name'
+  id: null,
+  userName: '',
+  email: ''
 }
 
 export function userReducer(state = userState, action) {
   switch (action.type) {
     case 'CHANGE_NAME':
-      return { ...state, name: action.name }
+      return { ...state, userName: action.name }
     default:
       return state
   }

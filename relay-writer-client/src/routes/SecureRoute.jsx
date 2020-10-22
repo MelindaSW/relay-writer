@@ -7,8 +7,7 @@ const SecureRoute = ({ component: Component, auth, ...other }) => {
     <Route
       {...other}
       render={props => {
-        if (auth === false) return <Redirect to="/" />
-        if (auth) return <Component auth={auth} {...props} />
+        return auth ? <Component auth={auth} {...props} /> : <Redirect to="/" />
       }}
     />
   )

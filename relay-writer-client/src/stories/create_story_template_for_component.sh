@@ -23,7 +23,7 @@ touch $storyFile
 echo "Creating story for "$name""
 
 echo "import React from 'react';
-import { "$name" } from '..';
+import { "$name" } from '../../"$dir"';
 
 export default {
   title: '"$dir"/"$name"',

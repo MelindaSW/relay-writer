@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, TextField, Card } from '@material-ui/core'
-import './styles/LoginPage.scss'
+import './loginPage.scss'
 
 const LoginPage = () => {
   return (
