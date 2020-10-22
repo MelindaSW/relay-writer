@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button as MUIButton } from '@material-ui/core'
-import './button.scss'
+import { useStyles } from './button.styles'
 
 const Button = ({
-  children = 'Button text',
+  children,
+  color = 'primary',
   disabled = false,
   disableElevation = true,
   disableFocusRipple = false,
@@ -14,6 +15,8 @@ const Button = ({
   size = 'medium',
   variant = 'contained'
 }) => {
+  const styleProps = { color, variant }
+  const classes = useStyles({ ...styleProps })
   const props = {
     children,
     disabled,
@@ -25,19 +28,20 @@ const Button = ({
     variant,
     onClick
   }
-  return <MUIButton {...props} />
+  return <MUIButton className={classes.root} {...props} />
 }
 
 Button.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.node,
   disabled: PropTypes.bool,
+  color: PropTypes.oneOf(['primary', 'secondary']),
   disableElevation: PropTypes.bool,
   disableFocusRipple: PropTypes.bool,
   disableRipple: PropTypes.bool,
   fullWidth: PropTypes.bool,
   onClick: PropTypes.func,
-  size: PropTypes.string,
-  variant: PropTypes.string
+  size: PropTypes.oneOf(['large', 'medium', 'small']),
+  variant: PropTypes.oneOf(['contained', 'outlined', 'text'])
 }
 
 export default Button

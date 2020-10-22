@@ -1,4 +1,4 @@
-export { default as Button } from './button/Button'
-export { default as Header } from './header/Header'
-export { default as Sidemenu } from './sidemenu/Sidemenu'
-export { default as Footer } from './footer/Footer'
+export { default as Button } from './button'
+export { default as Header } from './header'
+export { default as Sidemenu } from './sidemenu'
+export { default as Footer } from './footer'
