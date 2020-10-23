@@ -1,6 +1,6 @@
 import React from 'react'
 import { Header, Sidemenu, Footer } from '../../components'
-import './mainPage.scss'
+// import './mainPage.scss'
 
 const MainPage = () => {
   return (

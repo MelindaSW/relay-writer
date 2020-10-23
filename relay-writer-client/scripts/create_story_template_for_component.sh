@@ -10,9 +10,11 @@ echo "Running" $0
 dir=$1
 name=$2
 
-dirPath=$dir/
+cd ..
 
-storyFile=./$dirPath/$name.stories.jsx
+dirPath=src/$dir/$name
+
+storyFile=$dirPath/$name.stories.jsx
 
 [ -d $dirPath ] && echo ""$dirPath" already exists. Adding story to existing directory"
 [ -f $storyFile ] && echo ""$storyFile" already exists. Aborting script." && exit 1
@@ -35,7 +37,6 @@ const Template = args => <"$name" {...args} />
 
 export const Primary = Template.bind({})
 Primary.args = {};" >> $storyFile
-
 
 echo "Added content to the "$name" story"
 echo "Story created"

@@ -5,7 +5,7 @@ export const useStyles = makeStyles(theme => ({
     backgroundColor: props =>
       props.color === 'primary'
         ? theme.palette.primary.main
-        : theme.palette.secondary.main,
+        : theme.palette.secondary.dark,
     color: props =>
       props.color === 'primary'
         ? theme.palette.primary.contrastText

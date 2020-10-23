@@ -8,7 +8,7 @@ export default create({
 
   // UI
   appBg: 'lightgrey',
-  appContentBg: 'white',
+  appContentBg: '#dbedf3',
   appBorderColor: 'grey',
   appBorderRadius: 4,
 
@@ -31,7 +31,7 @@ export default create({
   inputTextColor: 'black',
   inputBorderRadius: 4,
 
-  brandTitle: 'My custom storybook',
+  brandTitle: 'Storybook for dnd-relay-writer',
   brandUrl: 'https://melindasw.se'
   //   brandImage: 'https://placehold.it/350x150'
 })
