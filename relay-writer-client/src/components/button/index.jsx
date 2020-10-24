@@ -28,7 +28,12 @@ const Button = ({
     variant,
     onClick
   }
-  return <MUIButton className={classes.root} {...props} />
+  return (
+    <MUIButton
+      classes={{ root: classes.root, disabled: classes.disabled }}
+      {...props}
+    />
+  )
 }
 
 Button.propTypes = {

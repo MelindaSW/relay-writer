@@ -1,5 +1,4 @@
 import React from 'react'
-import '../src/styles_theme/index.scss'
 import { addDecorator } from '@storybook/react'
 import { ThemeProvider } from '@material-ui/core/styles'
 

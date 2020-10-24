@@ -15,5 +15,9 @@ export const useStyles = makeStyles(theme => ({
       props.variant === 'outlined'
         ? '1px solid' + theme.palette.primary.dark
         : 'none'
+  },
+  disabled: {
+    color: theme.palette.primary.light,
+    backgroundColor: theme.palette.primary.main
   }
 }))

@@ -6,10 +6,9 @@ import './header.scss'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    ...theme.typography.button,
     padding: theme.spacing(1),
     color: theme.palette.primary.light,
-    fontWeight: 'bold'
+    fontWeight: 'normal'
   }
 }))
 
@@ -17,7 +16,9 @@ const Header = ({ children }) => {
   const classes = useStyles()
   return (
     <header>
-      <Typography className={classes.root}>{children}</Typography>
+      <Typography className={classes.root} variant="h6">
+        {children}
+      </Typography>
     </header>
   )
 }
