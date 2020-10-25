@@ -10,7 +10,7 @@ export const useStyles = makeStyles(theme => ({
       props.color === 'primary'
         ? theme.palette.primary.contrastText
         : theme.palette.secondary.contrastText,
-    borderRadius: '2px',
+    borderRadius: '0px',
     border: props =>
       props.variant === 'outlined'
         ? '1px solid' + theme.palette.primary.dark

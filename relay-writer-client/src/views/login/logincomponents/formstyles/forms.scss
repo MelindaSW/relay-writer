@@ -1,0 +1,17 @@
+@import '../../../../styles_theme/variables.scss';
+
+form {
+  background-color: $light;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+#button {
+  border-left: 2px dashed $medium;
+  border-right: 2px dashed $medium;
+  border-bottom: 2px solid $medium;
+  padding: 20px 15px 0px 15px;
+}

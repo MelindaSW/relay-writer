@@ -11,3 +11,6 @@ const Template = args => <TextField {...args} />
 
 export const Primary = Template.bind({})
 Primary.args = {}
+
+export const Secondary = Template.bind({})
+Secondary.args = { color: 'secondary', size: 'small' }

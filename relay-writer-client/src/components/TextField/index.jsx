@@ -10,7 +10,7 @@ const TextField = ({
   label = 'Label text',
   error = false,
   fullWidth = false,
-  helperText = 'Helper text',
+  helperText = '',
   id = '',
   margin = 'dense',
   multiline = false,
@@ -22,7 +22,7 @@ const TextField = ({
   required = false,
   rows = 1,
   rowsMax = 1,
-  size = 'medium',
+  size,
   type = 'text',
   value,
   variant = 'filled'
@@ -50,7 +50,7 @@ const TextField = ({
     variant
   }
   const classes = useStyles()
-  return <MUITextField classes={classes.root} {...props} />
+  return <MUITextField classes={classes} {...props} />
 }
 
 TextField.propTypes = {
