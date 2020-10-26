@@ -1,0 +1,18 @@
+@import '../../styles_theme/variables.scss';
+
+footer {
+  background-color: $darkopaque;
+  color: $lightest;
+  height: 70px;
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#content {
+  width: 90%;
+  font-size: xx-small;
+}

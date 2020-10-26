@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Typography, Divider, ButtonGroup } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { Header, Button } from '../../components'
+import { Header, Button, Footer } from '../../components'
 import { SignInForm, SignUpForm } from './logincomponents'
 import './loginPage.scss'
 
@@ -63,6 +63,11 @@ const LoginPage = () => {
       <div id="forms">
         {(signIn && <SignInForm />) || (signUp && <SignUpForm />)}
       </div>
+      <Footer
+        content={
+          'Repository for this project can be found at github.com/MelindaSW/relay-writer.'
+        }
+      />
     </div>
   )
 }
