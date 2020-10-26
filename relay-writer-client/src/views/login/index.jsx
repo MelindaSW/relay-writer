@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 
 const LoginPage = () => {
   const dividerClasses = useStyles()
-  const [signIn, setSignIn] = useState(true)
+  const [signIn, setSignIn] = useState(false)
   const [signUp, setSignUp] = useState(false)
 
   const handleOnClickShowForm = displayForm => {

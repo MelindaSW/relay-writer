@@ -50,7 +50,7 @@ const SignUpForm = ({}) => {
         />
         <Divider classes={dividerClasses} />
         <div id="button">
-          <Button children="Sign in" type="submit" />
+          <Button color="secondary" children="Sign up" type="submit" />
         </div>
       </form>
     </Container>

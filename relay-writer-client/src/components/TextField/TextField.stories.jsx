@@ -7,7 +7,11 @@ export default {
   argTypes: {}
 }
 
-const Template = args => <TextField {...args} />
+const Template = args => (
+  <div style={{ backgroundColor: 'white', padding: '20px', width: '30%' }}>
+    <TextField {...args} />
+  </div>
+)
 
 export const Primary = Template.bind({})
 Primary.args = {}
