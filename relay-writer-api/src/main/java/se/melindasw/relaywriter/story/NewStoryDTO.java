@@ -10,4 +10,6 @@ public class NewStoryDTO {
   String title;
   String description;
   Long creatorId;
+  String characterName;
+  String characterRace;
 }

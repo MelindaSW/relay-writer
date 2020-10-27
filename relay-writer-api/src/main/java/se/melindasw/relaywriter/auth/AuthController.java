@@ -1,6 +1,8 @@
 package se.melindasw.relaywriter.auth;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/auth")
+@RestController
+@RequestMapping("/auth")
 public class AuthController {}

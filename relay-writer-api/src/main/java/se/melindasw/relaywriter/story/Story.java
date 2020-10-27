@@ -22,6 +22,9 @@ public class Story {
   private LocalDateTime createdAt;
   private String title;
   private String description;
+  private String characterName;
+  private String characterRace;
+  private String characterClass;
 
   @ManyToOne
   @JoinColumn(name = "user_id")
@@ -30,10 +33,10 @@ public class Story {
 
   public Story() {}
 
-  public Story(LocalDateTime createdAt, String title, String description, User creator) {
-    this.createdAt = createdAt;
-    this.title = title;
-    this.description = description;
-    this.creator = creator;
-  }
+  //  public Story(LocalDateTime createdAt, String title, String description, User creator) {
+  //    this.createdAt = createdAt;
+  //    this.title = title;
+  //    this.description = description;
+  //    this.creator = creator;
+  //  }
 }

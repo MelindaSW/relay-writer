@@ -18,11 +18,11 @@ VALUES (1, 1);
 INSERT INTO users_roles (users_id, roles_id)
 VALUES (2, 2);
 
-INSERT INTO stories (created_at, description, title, user_id)
-VALUES (NOW(), 'A short description of the story', 'Awesome story title', 1);
+INSERT INTO stories (character_class, character_name, character_race, created_at, description, title, user_id)
+VALUES ('Barbarian', 'Kola', 'Goliath', NOW(), 'A short description of the story', 'Awesome story title', 1);
 
-INSERT INTO stories (created_at, description, title, user_id)
-VALUES (NOW(), 'A short description of the story', 'Awesome story title', 2);
+INSERT INTO stories (character_class, character_name, character_race, created_at, description, title, user_id)
+VALUES ('Druid', 'Ea', 'Tiefling', NOW(), 'A short description of the story', 'Awesome story title', 2);
 
 INSERT INTO snippets (author, created_at, snippet, story_id)
 VALUES ('User1', NOW(), 'Lorem ipsum dolor sit amet and so on...', 1);

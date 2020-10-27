@@ -11,5 +11,8 @@ public class StoryDTO {
   LocalDateTime createdAt;
   String title;
   String description;
+  String characterName;
+  String characterRace;
+  String characterClass;
   UserDTO creator;
 }

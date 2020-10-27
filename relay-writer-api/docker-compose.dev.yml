@@ -13,5 +13,16 @@ services:
     volumes:
       - /db-data:/var/lib/postgresql/data
 
+#  relay-writer-api:
+#    build: .
+#    image: relay-writer
+#    depends_on:
+#      - postgres
+#    hostname: localhost
+#    restart: always
+#    ports:
+#      - "8080:8080"
+
+
 volumes:
   data-volume:

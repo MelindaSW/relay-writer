@@ -34,6 +34,9 @@ public class DTOConverter {
     dto.setCreatedAt(story.getCreatedAt());
     dto.setTitle(story.getTitle());
     dto.setDescription(story.getDescription());
+    dto.setCharacterName(story.getCharacterName());
+    dto.setCharacterRace(story.getCharacterRace());
+    dto.setCharacterClass(story.getCharacterClass());
     UserDTO creator = convertToUserDTO(story.getCreator());
     dto.setCreator(creator);
     return dto;
