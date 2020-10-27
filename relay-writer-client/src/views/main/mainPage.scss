@@ -1,0 +1,8 @@
+@import '../../styles_theme/variables.scss';
+
+#main {
+  background-color: $medium;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

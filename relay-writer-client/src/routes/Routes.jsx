@@ -8,8 +8,7 @@ const Routes = () => {
     <>
       <Switch>
         <Route exact path="/" component={LoginPage} />
-        <Route path="/start" component={MainPage} />
-        {/* <SecureRoute /> */}
+        <SecureRoute auth={true} path="/relaywriter" component={MainPage} />
       </Switch>
     </>
   )
