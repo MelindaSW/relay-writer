@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import { Link, useRouteMatch } from 'react-router-dom'
+import FeatureRoutes from '../../routes/FeatureRoutes'
 import {
   Typography,
   Toolbar,
@@ -18,6 +19,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import RadioButtonUncheckedOutlinedIcon from '@material-ui/icons/RadioButtonUncheckedOutlined'
 import { useTheme } from '@material-ui/core/styles'
 import { useStyles } from './drawer.styles'
+import './drawer.scss'
 
 const ResponsiveDrawer = ({ title, drawerItems }) => {
   const classes = useStyles()
@@ -33,13 +35,15 @@ const ResponsiveDrawer = ({ title, drawerItems }) => {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {drawerItems.map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              <RadioButtonUncheckedOutlinedIcon style={{ fontSize: 15 }} />
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+        {drawerItems.map((item, index) => (
+          <Link to={item.link} key={index}>
+            <ListItem button>
+              <ListItemIcon>
+                <RadioButtonUncheckedOutlinedIcon style={{ fontSize: 15 }} />
+              </ListItemIcon>
+              <ListItemText primary={item.text} />
+            </ListItem>
+          </Link>
         ))}
       </List>
       <Divider />
@@ -96,7 +100,7 @@ const ResponsiveDrawer = ({ title, drawerItems }) => {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {/* TODO: Router view here with main routes for features */}
+        <FeatureRoutes />
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus

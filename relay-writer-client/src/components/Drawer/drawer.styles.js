@@ -19,7 +19,7 @@ export const useStyles = makeStyles(theme => ({
     height: '100px'
   },
   menuButton: {
-    marginRight: theme.spacing(4),
+    marginRight: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
       display: 'none'
     }

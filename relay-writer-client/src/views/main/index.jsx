@@ -2,7 +2,11 @@ import React from 'react'
 import { Header, Footer, Drawer } from '../../components'
 import './mainPage.scss'
 
-const drawerItems = ['Create story', 'Continue story', 'Search stories']
+const drawerItems = [
+  { text: 'Create story', link: '/relaywriter/new' },
+  { text: 'Continue story', link: '/relaywriter/continue' },
+  { text: 'Search stories', link: '/relaywriter/search' }
+]
 
 const MainPage = () => {
   return (

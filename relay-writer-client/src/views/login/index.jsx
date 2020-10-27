@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import { Typography, Divider, ButtonGroup } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import { Header, Button, Footer } from '../../components'
-import { SignInForm, SignUpForm } from './logincomponents'
+import {
+  Header,
+  Button,
+  Footer,
+  SignInForm,
+  SignUpForm
+} from '../../components'
 import './loginPage.scss'
 
 const useStyles = makeStyles(theme => ({
