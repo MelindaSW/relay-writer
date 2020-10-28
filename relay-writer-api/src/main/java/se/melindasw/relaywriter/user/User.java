@@ -1,5 +1,6 @@
 package se.melindasw.relaywriter.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import se.melindasw.relaywriter.role.Role;
@@ -31,6 +32,7 @@ public class User {
   private String password;
 
   @Column(nullable = false)
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
   private LocalDateTime createdAt;
 
   @ManyToMany(cascade = ALL)

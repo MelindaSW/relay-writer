@@ -1,4 +1,4 @@
-package se.melindasw.relaywriter.authtests;
+package se.melindasw.relaywriter.auth;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

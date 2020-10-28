@@ -1,5 +1,6 @@
 package se.melindasw.relaywriter.snippet;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
@@ -18,7 +19,9 @@ public class Snippet {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
   private LocalDateTime createdAt;
+
   private String snippet;
   private String author;
 
