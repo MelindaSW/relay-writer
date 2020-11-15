@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Footer, Drawer } from '../../components'
+import { Footer, Drawer } from '../../components'
 import './mainPage.scss'
 
 const drawerItems = [

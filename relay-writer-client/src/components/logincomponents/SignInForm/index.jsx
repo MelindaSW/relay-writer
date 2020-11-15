@@ -6,7 +6,7 @@ import { TextField, Button } from '../../index'
 import { useStyles } from '../formstyles/form.styles'
 import '../formstyles/forms.scss'
 
-const SignInForm = ({}) => {
+const SignInForm = () => {
   const dividerClasses = useStyles()
 
   return (

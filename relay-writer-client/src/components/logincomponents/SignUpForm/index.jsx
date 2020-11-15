@@ -5,7 +5,7 @@ import { TextField, Button } from '../../index'
 import { useStyles } from '../formstyles/form.styles'
 import '../formstyles/forms.scss'
 
-const SignUpForm = ({}) => {
+const SignUpForm = () => {
   const dividerClasses = useStyles()
   return (
     <Container>
