@@ -20,7 +20,7 @@ import { useTheme } from '@material-ui/core/styles'
 import { useStyles } from './drawer.styles'
 import './drawer.scss'
 
-function ElevationScroll(props) {
+const ElevationScroll = props => {
   const { children } = props
   const trigger = useScrollTrigger({
     disableHysteresis: true,
@@ -52,13 +52,13 @@ const ResponsiveDrawer = ({ title, drawerItems }) => {
       <List>
         {drawerItems.map((item, index) => (
           <Link to={item.link} key={index}>
-            <ListItem button>
+            <ListItem button onClick={handleDrawerToggle}>
               <ListItemText primary={item.text} />
             </ListItem>
+            <Divider />
           </Link>
         ))}
       </List>
-      <Divider />
     </div>
   )
 
@@ -83,8 +83,7 @@ const ResponsiveDrawer = ({ title, drawerItems }) => {
         </AppBar>
       </ElevationScroll>
       <nav className={classes.drawer} aria-label="mailbox folders">
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
+        <Hidden smUp>
           <Drawer
             variant="temporary"
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
@@ -100,7 +99,7 @@ const ResponsiveDrawer = ({ title, drawerItems }) => {
             {drawer}
           </Drawer>
         </Hidden>
-        <Hidden xsDown implementation="css">
+        <Hidden xsDown>
           <Drawer
             classes={{
               paper: classes.drawerPaper
@@ -114,7 +113,8 @@ const ResponsiveDrawer = ({ title, drawerItems }) => {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <FeatureRoutes /> {/* Create new story, continue story etc */}
+        <FeatureRoutes />
+        {/* Main features, Create new story, continue story etc */}
       </main>
     </div>
   )
