@@ -1,7 +1,11 @@
 const newStoryState = {
-  title: 'Amazing title',
-  race: '',
-  class: ''
+  authorId: null,
+  storyId: null,
+  title: '',
+  characterName: '',
+  characterRace: '',
+  characterClass: '',
+  snippets: []
 }
 
 export function newStoryReducer(state = newStoryState, action) {

@@ -1,13 +1,33 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { TextField, Button } from '../../components'
+import { Divider } from '@material-ui/core'
+
 import './newStory.scss'
 
 const NewStory = props => {
   return (
-    <div>
-      {' '}
-      <h1>New story</h1>
-      <p>{props.newStoryState.title}</p>
+    <div id="new-story">
+      {/* <h1>New story</h1> */}
+      {/* <Container id="form-container" fixed> */}
+      <form>
+        <Divider fullWidth flexItem />
+
+        <TextField class="form-fields" label="Title" />
+        <TextField class="form-fields" label="Short descripion" />
+        <TextField class="form-fields" label="Character name" />
+        <TextField class="form-fields" label="Race" />
+        <TextField class="form-fields" label="Class" />
+        <TextField
+          class="form-fields"
+          label="Once upon a time ..."
+          type="text"
+          multiline
+        />
+        <Divider fullWidth flexItem />
+        <Button type="submit" children="Create" />
+      </form>
+      {/* </Container> */}
     </div>
   )
 }
@@ -16,38 +36,3 @@ const mapStateToProps = ({ newStoryState }) => {
 }
 
 export default connect(mapStateToProps)(NewStory)
-
-// const mapStateToProps = ({
-//   topPanelState: { settings },
-//   settingsState: { tabSettings },
-//   logViewerState: {
-//     logs,
-//     lengthOfInitialLogLineArrays,
-//     totalNrOfLinesForFiles,
-//     lengthOfEmptyLines,
-//     currentScrollTops,
-//     indexesForNewLines,
-//     filteredLogs,
-//     totalNrOfFilteredLines,
-//     filterString
-//   },
-//   logInfoState: { logSizes, lastSeenLogSizes }
-// }) => {
-//   return {
-//     settings,
-//     tabSettings,
-//     logs,
-//     logSizes,
-//     lastSeenLogSizes,
-//     lengthOfInitialLogLineArrays,
-//     totalNrOfLinesForFiles,
-//     lengthOfEmptyLines,
-//     currentScrollTops,
-//     indexesForNewLines,
-//     filteredLogs,
-//     totalNrOfFilteredLines,
-//     filterString
-//   }
-// }
-
-// export default connect(mapStateToProps)(LogViewer)
