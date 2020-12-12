@@ -1,4 +1,4 @@
-@import '../../styles_theme/variables.scss';
+@import '../../sass-and-MUI/variables.scss';
 
 #new-story {
   width: 100%;
@@ -6,17 +6,33 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  align-self: center;
+  justify-self: center;
+}
+
+#information {
+  display: flex;
+  flex-direction: column;
+  background-color: $lightest;
+  width: 90%;
+  margin-top: 62px;
+  height: fit-content;
 }
 
 form {
-  width: 100%;
-  padding-top: 20px;
-  justify-self: left;
-  margin-top: 100px;
-  margin-bottom: 100px;
-  padding: 0px;
+  margin: auto;
+  height: fit-content;
+  margin-bottom: 30px;
+  width: 80%;
 
   .form-fields {
     width: 100%;
+  }
+
+  #button {
+    border-left: 2px dashed $medium;
+    border-right: 2px dashed $medium;
+    border-bottom: 2px solid $medium;
+    padding: 20px 15px 0px 15px;
   }
 }

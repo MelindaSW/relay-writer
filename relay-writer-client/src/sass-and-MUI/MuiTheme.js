@@ -34,6 +34,15 @@ const MuiTheme = createMuiTheme({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"'
     ].join(',')
+  },
+  overrides: {
+    //   MuiOutlinedInput: {
+    //     multiline: {
+    //       fontWeight: 'light',
+    //       fontSize: '10px',
+    //       width: '100%'
+    //     }
+    //   }
   }
 })
 

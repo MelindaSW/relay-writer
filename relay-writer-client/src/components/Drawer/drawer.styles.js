@@ -19,7 +19,7 @@ export const useStyles = makeStyles(theme => ({
     height: '100px'
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
     [theme.breakpoints.up('sm')]: {
       display: 'none'
     }
@@ -32,7 +32,6 @@ export const useStyles = makeStyles(theme => ({
     height: '70%'
   },
   content: {
-    flexGrow: 1,
-    padding: theme.spacing(5)
+    flexGrow: 1
   }
 }))

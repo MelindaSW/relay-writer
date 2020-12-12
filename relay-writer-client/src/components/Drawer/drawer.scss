@@ -1,5 +1,4 @@
-@import '../../styles_theme/variables.scss';
-
+@import '../../sass-and-MUI/variables.scss';
 a {
   text-decoration: none;
   color: $darkest;
@@ -8,4 +7,5 @@ a {
 main {
   padding: 0px;
   margin: 0px;
+  // min-height: 100vh;
 }

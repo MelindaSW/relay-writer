@@ -1,33 +1,112 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
+import { postCreateNewStory } from '../../axios/api'
 import { TextField, Button } from '../../components'
 import { Divider } from '@material-ui/core'
-
+import { useDividerStyles } from './newStory.styles'
 import './newStory.scss'
 
 const NewStory = props => {
+  const dividerClasses = useDividerStyles()
+  const [allFieldsFilled, setAllFieldsFilled] = useState(false)
+  const [formState, setFormState] = useState({
+    title: '',
+    description: '',
+    name: '',
+    race: '',
+    class: '',
+    snippet: ''
+  })
+
+  const handleOnChange = event => {
+    console.log('on change triggered')
+  }
+
+  const onSubmit = () => {
+    postCreateNewStory(formState)
+  }
+
   return (
     <div id="new-story">
-      {/* <h1>New story</h1> */}
-      {/* <Container id="form-container" fixed> */}
+      <header id="information">
+        <h3 className="title">Create a new story</h3>
+        <p>Lorem ipsum and so on</p>
+      </header>
       <form>
-        <Divider fullWidth flexItem />
-
-        <TextField class="form-fields" label="Title" />
-        <TextField class="form-fields" label="Short descripion" />
-        <TextField class="form-fields" label="Character name" />
-        <TextField class="form-fields" label="Race" />
-        <TextField class="form-fields" label="Class" />
         <TextField
           class="form-fields"
-          label="Once upon a time ..."
-          type="text"
-          multiline
+          id="title"
+          label="Title"
+          name="title"
+          value={formState.title}
+          variant="outlined"
+          placeholder=""
+          required
         />
-        <Divider fullWidth flexItem />
-        <Button type="submit" children="Create" />
+        <TextField
+          class="form-fields"
+          id="short-description"
+          label="Short description"
+          name="description"
+          value={formState.description}
+          variant="outlined"
+          placeholder=""
+          required
+        />
+        <TextField
+          class="form-fields"
+          id="name-of-character"
+          label="Name of character"
+          name="name"
+          value={formState.name}
+          variant="outlined"
+          placeholder=""
+          required
+        />
+        <TextField
+          class="form-fields"
+          id="dnd-race"
+          label="DND race"
+          name="race"
+          value={formState.race}
+          variant="outlined"
+          placeholder=""
+          required
+        />
+        <TextField
+          class="form-fields"
+          id="dnd-class"
+          label="DND Class"
+          name="class"
+          value={formState.class}
+          variant="outlined"
+          placeholder=""
+          required
+        />
+        <TextField
+          class="form-fields"
+          id="start-your-story-here"
+          label="Start your story here"
+          type="text"
+          variant="outlined"
+          placeholder=""
+          multiline
+          name="snippet"
+          value={formState.snippet}
+          rows={15}
+          rowsMax={10}
+          required
+        />
+        <Divider classes={dividerClasses} />
+        <div id="button">
+          <Button
+            onClick={onSubmit}
+            type="submit"
+            children="Create"
+            disabled={allFieldsFilled}
+          />
+        </div>
       </form>
-      {/* </Container> */}
     </div>
   )
 }
