@@ -1,6 +1,9 @@
+![Client CI](https://github.com/MelindaSW/relay-writer/workflows/Client%20CI/badge.svg?branch=develop)  
+![API CI](https://github.com/MelindaSW/relay-writer/workflows/API%20CI/badge.svg?branch=develop)
+
 # relay-writer
 
-Relay writer webapp for DND character backstory collaboration. This is a remake of a first year school assignment where I used Express, SQLite and Vue.js. It can be seen in the earliest commit. Following is the setup so far.
+Relay writer webapp for DND character backstory collaboration. This is a remake of a first year school assignment where I used Node.js, Express, SQLite and Vue.js, as can be seen in the earliest commit. Following is the setup so far.
 
 #
 
