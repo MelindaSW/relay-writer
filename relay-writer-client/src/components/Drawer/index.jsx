@@ -114,7 +114,7 @@ const ResponsiveDrawer = ({ title, drawerItems }) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <FeatureRoutes />
-        {/* Main features, Create new story, continue story etc */}
+        {/* Main features displayed here, Create new story, continue story etc */}
       </main>
     </div>
   )

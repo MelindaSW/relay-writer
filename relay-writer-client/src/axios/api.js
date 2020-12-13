@@ -1,17 +1,18 @@
-const { default: Axios } = require('axios')
-
 const axios = require('axios')
 
-const postCreateNewStory = data => {
+const postCreateNewStory = async data => {
   console.log(data)
   // Send a POST request
-  axios({
-    method: 'post',
-    url: '/user/12345',
-    data: JSON.stringify(data, data)
-  })
-    .then(response => console.log(response))
-    .catch(err => console.log(err))
+  try {
+    const response = await axios({
+      method: 'post',
+      url: '/user/12345',
+      data: JSON.stringify(data, data)
+    })
+    console.log(response)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export { postCreateNewStory }
