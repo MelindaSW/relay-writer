@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState,/* useEffect, useRef*/ } from 'react'
 import { connect } from 'react-redux'
 import { postCreateNewStory } from '../../axios/api'
 import { TextField, Button } from '../../components'
@@ -18,9 +18,11 @@ const NewStory = props => {
     snippet: ''
   })
 
-  const handleOnChange = event => {
-    console.log('on change triggered')
-  }
+  setAllFieldsFilled(true)
+  setFormState({})
+  // const handleOnChange = event => {
+  //   console.log('on change triggered')
+  // }
 
   const onSubmit = () => {
     postCreateNewStory(formState)
