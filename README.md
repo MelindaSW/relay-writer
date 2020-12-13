@@ -1,4 +1,4 @@
-![Client CI](https://github.com/MelindaSW/relay-writer/workflows/Client%20CI/badge.svg?branch=develop)  
+![Client CI](https://github.com/MelindaSW/relay-writer/workflows/Client%20CI/badge.svg?branch=develop)
 ![API CI](https://github.com/MelindaSW/relay-writer/workflows/API%20CI/badge.svg?branch=develop)
 
 # relay-writer
@@ -69,8 +69,8 @@ To start StoryBook, run `npm storybook`. The StoryBook ui can then be found on [
 
 ### Github Actions
 
-Configurations and learning of Github Actions is currently in progress. I am using [act](https://github.com/nektos/act) to test run the jobs locally. The yml files can be found in .github\workflows
+Configurations and learning of Github Actions continous integration is currently in progress. I am using [act](https://github.com/nektos/act) to test run the jobs locally. The yml files can be found in .github\workflows
 
 #
 
-Check out the Projects page to see the backlog and feel free to contact me if you want to join in on the development!
+Check out the relay-writer [project](https://github.com/MelindaSW/relay-writer/projects/1) to see what is going on in the backlog and feel free to contact me if you have any questions or want to join in on the development!
