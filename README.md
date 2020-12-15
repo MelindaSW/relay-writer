@@ -15,7 +15,8 @@ Relay writer webapp for DND character backstory collaboration. This is a remake 
 [JUnit](https://junit.org/junit5/)  
 [Mockito](https://site.mockito.org/)  
 [Spring Security](https://spring.io/projects/spring-security)  
-[Swagger](https://swagger.io/)
+[Swagger](https://swagger.io/)  
+[Lombok](https://projectlombok.org/)
 
 ### Frontend
 
