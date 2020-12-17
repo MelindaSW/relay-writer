@@ -15,6 +15,7 @@ public class NewStoryDTO {
   Long creatorId;
   String characterName;
   String characterRace;
+  String characterClass;
 
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -26,7 +27,8 @@ public class NewStoryDTO {
       String description,
       Long creatorId,
       String characterName,
-      String characterRace) {
+      String characterRace,
+      String characterClass) {
 
     this.createdAt = createdAt;
     this.title = title;
@@ -34,5 +36,6 @@ public class NewStoryDTO {
     this.creatorId = creatorId;
     this.characterName = characterName;
     this.characterRace = characterRace;
+    this.characterClass = characterClass;
   }
 }

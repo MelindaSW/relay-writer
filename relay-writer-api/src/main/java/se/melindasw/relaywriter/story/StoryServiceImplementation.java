@@ -41,6 +41,9 @@ public class StoryServiceImplementation implements StoryService {
     story.setTitle(dto.getTitle());
     story.setDescription(dto.getDescription());
     story.setCreatedAt(dto.getCreatedAt());
+    story.setCharacterClass(dto.getCharacterClass());
+    story.setCharacterName(dto.getCharacterName());
+    story.setCharacterRace(dto.getCharacterName());
     storyRepo.save(story);
     return dtoConverter.convertToStoryDTO(story);
   }
@@ -54,6 +57,9 @@ public class StoryServiceImplementation implements StoryService {
     story.setCreatedAt(dto.getCreatedAt());
     story.setDescription(dto.getDescription());
     story.setTitle(dto.getTitle());
+    story.setCharacterClass(dto.getCharacterClass());
+    story.setCharacterName(dto.getCharacterName());
+    story.setCharacterRace(dto.getCharacterName());
     storyRepo.save(story);
     return dtoConverter.convertToStoryDTO(story);
   }
