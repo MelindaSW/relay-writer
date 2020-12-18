@@ -8,6 +8,7 @@ import {
   SignInForm,
   SignUpForm
 } from '../../components'
+import logo from '../../assets/relay-writer-logo-500px.png'
 import './loginPage.scss'
 
 const useStyles = makeStyles(theme => ({
@@ -37,6 +38,7 @@ const LoginPage = () => {
   return (
     <div id="loginpage">
       <Header children="DND RELAY-WRITER" />
+      <img src={logo} alt="relay writer logo" height="100" width="100" />
       <div className="subtitle">
         <Typography variant="subtitle2">
           Welcome to the Dungeons & Dragons themed relay writing webapp!
