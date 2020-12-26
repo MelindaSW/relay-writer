@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import SecureRoute from './SecureRoute'
 import { LoginPage, MainPage } from '../views'
 
@@ -9,6 +9,7 @@ const Routes = () => {
       <Switch>
         <Route exact path="/" component={LoginPage} />
         <SecureRoute auth={true} path="/relaywriter" component={MainPage} />
+        <Route render={() => <Redirect to="/" />} />
       </Switch>
     </>
   )
