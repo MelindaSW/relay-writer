@@ -14,7 +14,7 @@ export const useStyles = makeStyles(theme => ({
   },
   appBar: {
     backgroundColor: theme.palette.primary.dark,
-    color: theme.palette.primary.light,
+    color: theme.palette.primary.lightest,
     zIndex: theme.zIndex.drawer + 1,
     height: '100px'
   },

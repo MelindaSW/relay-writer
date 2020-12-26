@@ -14,27 +14,12 @@ import {
   Divider,
   AppBar
 } from '@material-ui/core'
-import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import MenuIcon from '@material-ui/icons/Menu'
+import ElevationScroll from './ElevationScroll'
 import { useTheme } from '@material-ui/core/styles'
 import { useStyles } from './drawer.styles'
+import logo from '../../assets/relay-writer-logo-500px.png'
 import './drawer.scss'
-
-const ElevationScroll = props => {
-  const { children } = props
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 0
-  })
-
-  return React.cloneElement(children, {
-    elevation: trigger ? 4 : 0
-  })
-}
-
-ElevationScroll.propTypes = {
-  children: PropTypes.element.isRequired
-}
 
 const ResponsiveDrawer = ({ title, drawerItems }) => {
   const classes = useStyles()
@@ -59,6 +44,9 @@ const ResponsiveDrawer = ({ title, drawerItems }) => {
           </Link>
         ))}
       </List>
+      <div id="menuimage">
+        <img src={logo} alt="rw-icon" />
+      </div>
     </div>
   )
 
@@ -114,7 +102,7 @@ const ResponsiveDrawer = ({ title, drawerItems }) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <FeatureRoutes />
-        {/* Main features displayed here, Create new story, continue story etc */}
+        {/* Main features here, Create new story, continue story etc */}
       </main>
     </div>
   )
