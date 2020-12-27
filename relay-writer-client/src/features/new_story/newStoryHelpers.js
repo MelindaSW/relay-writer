@@ -1,4 +1,4 @@
-// import { postCreateNewStory, postNewStorySnippet } from '../../axios/api'
+import { postCreateNewStory } from '../../axios/api'
 
 const updateFormState = (eventId, newValue, formState) => {
   switch (eventId) {
@@ -26,9 +26,8 @@ const updateFormState = (eventId, newValue, formState) => {
   return formState
 }
 
-const handleSubmit = async (formState, dispatch) => {
-  //   await postCreateNewStory(formState, props.dispatch)
-  //   await postNewStorySnippet(snippetState, props.dispatch)
+const handleSubmit = async (data, dispatch) => {
+  await postCreateNewStory(data, dispatch)
 }
 
 export { updateFormState, handleSubmit }
