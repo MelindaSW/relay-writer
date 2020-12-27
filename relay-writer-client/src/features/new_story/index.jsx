@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { debounce } from 'lodash'
 import { updateFormState, handleSubmit } from './newStoryHelpers'
 import { TextField, Button } from '../../components'
 import { Divider } from '@material-ui/core'
@@ -9,28 +8,29 @@ import './newStory.scss'
 
 const NewStory = props => {
   const dividerClasses = useDividerStyles()
-  // const [allFieldsFilled, setAllFieldsFilled] = useState(false)
+  const [submitEnabled, setSubmitEnabled] = useState(false)
   const [formState, setFormState] = useState({
-    title: 'test title',
-    description: 'test description',
-    characterName: 'test name',
-    characterRace: 'test race',
-    characterClass: 'test class',
+    title: '',
+    description: '',
+    characterName: '',
+    characterRace: '',
+    characterClass: '',
     creatorId: props.userState.id,
     snippet: ''
   })
 
-  const debouncedHandleOnChange = debounce(
-    eventData =>
-      setFormState(
-        updateFormState(eventData.id, eventData.newValue, formState)
-      ),
-    1000
-  )
-
   const handleOnChange = event => {
-    const eventData = { id: event.target.id, newValue: event.target.value }
-    debouncedHandleOnChange(eventData)
+    setFormState(
+      updateFormState(event.target.id, event.target.value, formState)
+    )
+    setSubmitEnabled(
+      formState.title.length > 0 &&
+        formState.description.length > 0 &&
+        formState.characterName.length > 0 &&
+        formState.characterRace.length > 0 &&
+        formState.characterClass.length > 0 &&
+        formState.snippet.length > 0
+    )
   }
 
   return (
@@ -110,7 +110,7 @@ const NewStory = props => {
             onClick={() => handleSubmit(formState, props.dispatch)}
             type="submit"
             children="Create"
-            // disabled={allFieldsFilled}
+            disabled={!submitEnabled}
           />
         </div>
       </form>
