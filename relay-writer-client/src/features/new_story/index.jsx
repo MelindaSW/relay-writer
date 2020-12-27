@@ -9,6 +9,7 @@ import './newStory.scss'
 const NewStory = props => {
   const dividerClasses = useDividerStyles()
   const [submitEnabled, setSubmitEnabled] = useState(false)
+  const [snippetLength, setSnippetLength] = useState(0)
   const [formState, setFormState] = useState({
     title: '',
     description: '',
@@ -23,6 +24,10 @@ const NewStory = props => {
     setFormState(
       updateFormState(event.target.id, event.target.value, formState)
     )
+
+    if (event.target.id === 'start-your-story-here')
+      setSnippetLength(event.target.value.length)
+
     setSubmitEnabled(
       formState.title.length > 0 &&
         formState.description.length > 0 &&
@@ -93,6 +98,7 @@ const NewStory = props => {
         <TextField
           class="form-fields"
           id="start-your-story-here"
+          inputProps={{ maxLength: 150 }}
           label="Start your story here"
           type="text"
           variant="outlined"
@@ -104,6 +110,7 @@ const NewStory = props => {
           rowsMax={10}
           required
         />
+        <div id="counter">{snippetLength}/150</div>
         <Divider classes={dividerClasses} />
         <div id="button">
           <Button
