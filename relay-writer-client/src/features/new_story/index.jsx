@@ -1,6 +1,7 @@
-import React, { useState,/* useEffect, useRef*/ } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { postCreateNewStory } from '../../axios/api'
+import { debounce } from 'lodash'
+import { updateFormState, handleSubmit } from './newStoryHelpers'
 import { TextField, Button } from '../../components'
 import { Divider } from '@material-ui/core'
 import { useDividerStyles } from './newStory.styles'
@@ -8,39 +9,43 @@ import './newStory.scss'
 
 const NewStory = props => {
   const dividerClasses = useDividerStyles()
-  const [allFieldsFilled, setAllFieldsFilled] = useState(false)
+  // const [allFieldsFilled, setAllFieldsFilled] = useState(false)
   const [formState, setFormState] = useState({
-    title: '',
-    description: '',
-    name: '',
-    race: '',
-    class: '',
+    title: 'test title',
+    description: 'test description',
+    characterName: 'test name',
+    characterRace: 'test race',
+    characterClass: 'test class',
+    creatorId: props.userState.id,
     snippet: ''
   })
 
-  setAllFieldsFilled(true)
-  setFormState({})
-  // const handleOnChange = event => {
-  //   console.log('on change triggered')
-  // }
+  const debouncedHandleOnChange = debounce(
+    eventData =>
+      setFormState(
+        updateFormState(eventData.id, eventData.newValue, formState)
+      ),
+    1000
+  )
 
-  const onSubmit = () => {
-    postCreateNewStory(formState)
+  const handleOnChange = event => {
+    const eventData = { id: event.target.id, newValue: event.target.value }
+    debouncedHandleOnChange(eventData)
   }
 
   return (
     <div id="new-story">
-      <header id="information">
-        <h3 className="title">Create a new story</h3>
-        <p>Lorem ipsum and so on</p>
-      </header>
-      <form>
+      <form style={{ marginTop: '62px' }}>
+        <header id="information">
+          <h3 className="title">Start a new story</h3>
+        </header>
+        <Divider classes={dividerClasses} />
         <TextField
           class="form-fields"
-          id="title"
-          label="Title"
-          name="title"
-          value={formState.title}
+          id="story-title"
+          label="Story Title"
+          name="story-title"
+          onChange={e => handleOnChange(e)}
           variant="outlined"
           placeholder=""
           required
@@ -50,7 +55,7 @@ const NewStory = props => {
           id="short-description"
           label="Short description"
           name="description"
-          value={formState.description}
+          onChange={e => handleOnChange(e)}
           variant="outlined"
           placeholder=""
           required
@@ -59,8 +64,8 @@ const NewStory = props => {
           class="form-fields"
           id="name-of-character"
           label="Name of character"
-          name="name"
-          value={formState.name}
+          name="character-name"
+          onChange={e => handleOnChange(e)}
           variant="outlined"
           placeholder=""
           required
@@ -69,8 +74,8 @@ const NewStory = props => {
           class="form-fields"
           id="dnd-race"
           label="DND race"
-          name="race"
-          value={formState.race}
+          name="character-race"
+          onChange={e => handleOnChange(e)}
           variant="outlined"
           placeholder=""
           required
@@ -79,8 +84,8 @@ const NewStory = props => {
           class="form-fields"
           id="dnd-class"
           label="DND Class"
-          name="class"
-          value={formState.class}
+          name="character-class"
+          onChange={e => handleOnChange(e)}
           variant="outlined"
           placeholder=""
           required
@@ -93,8 +98,8 @@ const NewStory = props => {
           variant="outlined"
           placeholder=""
           multiline
-          name="snippet"
-          value={formState.snippet}
+          name="story-snippet"
+          onChange={e => handleOnChange(e)}
           rows={15}
           rowsMax={10}
           required
@@ -102,18 +107,18 @@ const NewStory = props => {
         <Divider classes={dividerClasses} />
         <div id="button">
           <Button
-            onClick={onSubmit}
+            onClick={() => handleSubmit(formState, props.dispatch)}
             type="submit"
             children="Create"
-            disabled={allFieldsFilled}
+            // disabled={allFieldsFilled}
           />
         </div>
       </form>
     </div>
   )
 }
-const mapStateToProps = ({ newStoryState }) => {
-  return { newStoryState }
+const mapStateToProps = ({ newStoryState, userState }) => {
+  return { newStoryState, userState }
 }
 
 export default connect(mapStateToProps)(NewStory)
