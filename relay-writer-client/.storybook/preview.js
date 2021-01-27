@@ -1,9 +1,9 @@
 import React from 'react'
 import { addDecorator } from '@storybook/react'
 import { ThemeProvider } from '@material-ui/core/styles'
-import '../src/styles_theme/index.scss'
+import '../src/index.scss'
 
-import MuiTheme from '../src/styles_theme/MuiTheme'
+import MuiTheme from '../src/sass-and-MUI/MuiTheme'
 
 addDecorator(story => <ThemeProvider theme={MuiTheme}>{story()}</ThemeProvider>)
 

@@ -41,9 +41,21 @@ const NewStory = props => {
   return (
     <div id="new-story">
       <form style={{ marginTop: '62px' }}>
-        <header id="information">
+        <div id="information">
           <h3 className="title">Start a new story</h3>
-        </header>
+          <p className="info">
+            Fill in all fields below to create your story. If you are in need of
+            inspiration we recommend visiting{' '}
+            <a href="https://www.dndbeyond.com/" target="_blank">
+              DND beyond
+            </a>{' '}
+            or{' '}
+            <a href="https://www.fantasynamegenerators.com/" target="_blank">
+              Fantasy name generators
+            </a>
+            .
+          </p>
+        </div>
         <Divider classes={dividerClasses} />
         <TextField
           class="form-fields"
@@ -58,7 +70,7 @@ const NewStory = props => {
         <TextField
           class="form-fields"
           id="short-description"
-          label="Short description"
+          label="Short Description"
           name="description"
           onChange={e => handleOnChange(e)}
           variant="outlined"
@@ -68,7 +80,7 @@ const NewStory = props => {
         <TextField
           class="form-fields"
           id="name-of-character"
-          label="Name of character"
+          label="Name of Character"
           name="character-name"
           onChange={e => handleOnChange(e)}
           variant="outlined"
@@ -78,7 +90,7 @@ const NewStory = props => {
         <TextField
           class="form-fields"
           id="dnd-race"
-          label="DND race"
+          label="DND Race"
           name="character-race"
           onChange={e => handleOnChange(e)}
           variant="outlined"
@@ -99,7 +111,7 @@ const NewStory = props => {
           class="form-fields"
           id="start-your-story-here"
           inputProps={{ maxLength: 150 }}
-          label="Start your story here"
+          label="Start Your Story Here"
           type="text"
           variant="outlined"
           placeholder=""

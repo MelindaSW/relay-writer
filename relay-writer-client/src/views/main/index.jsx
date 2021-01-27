@@ -3,9 +3,10 @@ import { Footer, Drawer } from '../../components'
 import './mainPage.scss'
 
 const drawerItems = [
-  { text: 'Create story', link: '/relaywriter/new' },
-  { text: 'Continue story', link: '/relaywriter/continue' },
-  { text: 'Search stories', link: '/relaywriter/search' }
+  { text: 'Home', link: '/home' },
+  { text: 'Create story', link: '/home/create' },
+  { text: 'Continue story', link: '/home/continue' },
+  { text: 'Search stories', link: '/home/search' }
 ]
 
 const MainPage = () => {

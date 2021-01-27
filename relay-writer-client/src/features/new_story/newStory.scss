@@ -14,12 +14,20 @@
   display: flex;
   flex-direction: column;
   background-color: $lightest;
-  width: fit-content;
+  width: 100%;
   height: fit-content;
 
   h3 {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  p {
+    width: 80%;
   }
 }
 

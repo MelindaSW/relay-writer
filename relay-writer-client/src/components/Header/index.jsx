@@ -7,7 +7,7 @@ import './header.scss'
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(1),
-    color: theme.palette.primary.light,
+    color: theme.palette.primary.lightest,
     fontWeight: 'normal'
   }
 }))
