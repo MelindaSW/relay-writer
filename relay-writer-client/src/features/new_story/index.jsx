@@ -46,11 +46,19 @@ const NewStory = props => {
           <p className="info">
             Fill in all fields below to create your story. If you are in need of
             inspiration we recommend visiting{' '}
-            <a href="https://www.dndbeyond.com/" target="_blank">
+            <a
+              href="https://www.dndbeyond.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               DND beyond
             </a>{' '}
             or{' '}
-            <a href="https://www.fantasynamegenerators.com/" target="_blank">
+            <a
+              href="https://www.fantasynamegenerators.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Fantasy name generators
             </a>
             .
