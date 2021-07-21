@@ -140,7 +140,9 @@ public class UserControllerTests {
   }
 
   @Test
-  public void testUpdateUser() {}
+  public void testUpdateUser() {
+
+  }
 
   static String asJsonString(final Object obj) {
     try {
@@ -150,14 +152,7 @@ public class UserControllerTests {
       throw new RuntimeException(e);
     }
   }
+
 }
 
-//
-//  @Test
-//  public void testFooDelete() throws Exception {
-//    this.mockMvc.perform(MockMvcRequestBuilders
-//            .delete("/api/foo/{id}", "11")
-//            .contentType(MediaType.APPLICATION_JSON))
-//            .accept(MediaType.APPLICATION_JSON))
-//            .andExpect(status().isOk());
-//  }
+

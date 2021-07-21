@@ -127,7 +127,7 @@ const NewStory = props => {
           name="story-snippet"
           onChange={e => handleOnChange(e)}
           rows={15}
-          rowsMax={10}
+          maxRows={10}
           required
         />
         <div id="counter">{snippetLength}/150</div>
