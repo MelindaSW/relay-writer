@@ -1,9 +1,9 @@
-package se.melindasw.relaywriter.helpers;
+package se.melindasw.relaywriter.mapping;
 
 import se.melindasw.relaywriter.story.Story;
 import se.melindasw.relaywriter.story.StoryDTO;
 
-public class EntityConverter {
+public class EntityMapper {
 
   public Story convertToStory(StoryDTO dto) {
     Story story = new Story();

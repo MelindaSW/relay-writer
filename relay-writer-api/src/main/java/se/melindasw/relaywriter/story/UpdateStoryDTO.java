@@ -16,6 +16,7 @@ public class UpdateStoryDTO {
   String characterName;
   String characterRace;
   String characterClass;
+  boolean isFinished;
 
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -30,6 +31,7 @@ public class UpdateStoryDTO {
       String characterName,
       String characterRace,
       String characterClass,
+      boolean isFinished,
       LocalDateTime createdAt) {
     this.id = id;
     this.title = title;
@@ -37,6 +39,7 @@ public class UpdateStoryDTO {
     this.characterName = characterName;
     this.characterRace = characterRace;
     this.characterClass = characterClass;
+    this.isFinished = isFinished;
     this.createdAt = createdAt;
   }
 }

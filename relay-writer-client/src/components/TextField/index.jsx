@@ -4,6 +4,7 @@ import { TextField as MUITextField } from '@material-ui/core'
 import { useStyles } from './textfield.styles'
 
 const TextField = ({
+  autoComplete = 'off',
   autoFocus,
   color = 'primary',
   disabled = false,
@@ -29,6 +30,7 @@ const TextField = ({
   variant = 'filled'
 }) => {
   const props = {
+    autoComplete,
     autoFocus,
     color,
     disabled,
@@ -56,6 +58,7 @@ const TextField = ({
 }
 
 TextField.propTypes = {
+  autoComplete: PropTypes.string,
   autoFocus: PropTypes.bool,
   color: PropTypes.oneOf(['primary', 'secondary']),
   disabled: PropTypes.bool,

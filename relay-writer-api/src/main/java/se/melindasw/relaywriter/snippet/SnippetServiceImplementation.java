@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import se.melindasw.relaywriter.exceptions.SnippetNotFoundException;
-import se.melindasw.relaywriter.helpers.DTOConverter;
+import se.melindasw.relaywriter.mapping.DTOMapper;
 import se.melindasw.relaywriter.story.Story;
 import se.melindasw.relaywriter.story.StoryRepo;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Service
 public class SnippetServiceImplementation implements SnippetService {
-  DTOConverter converter = new DTOConverter();
+  DTOMapper converter = new DTOMapper();
 
   private final SnippetRepo snippetRepo;
   private final StoryRepo storyRepo;
@@ -40,7 +40,7 @@ public class SnippetServiceImplementation implements SnippetService {
     snippet.setSnippet(newSnippetDTO.getSnippet());
     snippet.setCreatedAt(newSnippetDTO.getCreatedAt());
     snippetRepo.save(snippet);
-    return converter.convertToSnippetDTO(snippet);
+    return converter.mapToSnippetDTO(snippet);
   }
 
   @Override
@@ -48,7 +48,7 @@ public class SnippetServiceImplementation implements SnippetService {
     List<Snippet> snippets = snippetRepo.findAll(Sort.by(Sort.Direction.ASC, "id"));
     List<SnippetDTO> dtos = new ArrayList<>();
     for (Snippet snippet : snippets) {
-      dtos.add(converter.convertToSnippetDTO(snippet));
+      dtos.add(converter.mapToSnippetDTO(snippet));
     }
     return dtos;
   }
@@ -64,7 +64,7 @@ public class SnippetServiceImplementation implements SnippetService {
     snippet.setSnippet(updateSnippetDTO.getSnippet());
     snippet.setAuthor(updateSnippetDTO.getAuthor());
     snippetRepo.save(snippet);
-    return converter.convertToSnippetDTO(snippet);
+    return converter.mapToSnippetDTO(snippet);
   }
 
   @Override
@@ -85,7 +85,7 @@ public class SnippetServiceImplementation implements SnippetService {
     List<Snippet> allSnippetsForStory = snippetRepo.findByStoryOrderByIdAsc(story);
     List<SnippetDTO> response = new ArrayList<>();
     for (Snippet snippet : allSnippetsForStory) {
-      response.add(converter.convertToSnippetDTO(snippet));
+      response.add(converter.mapToSnippetDTO(snippet));
     }
     return response;
   }

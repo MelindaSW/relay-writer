@@ -1,4 +1,4 @@
-import { postCreateNewStory } from '../../axios/api'
+import { postCreateNewStory } from '../../axios/storiesApiReq'
 
 const updateFormState = (eventId, newValue, formState) => {
   switch (eventId) {

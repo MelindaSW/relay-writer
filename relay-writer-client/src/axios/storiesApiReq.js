@@ -1,9 +1,17 @@
 const axios = require('axios')
+const ERRORMSG = 'Error'
+const SUCCESSMSG = 'Success'
 
 const getAllStories = () => {
   axios('http://localhost:8080/dnd-relay-writer/story/all')
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
+    .then(res => {
+      console.log(res)
+      return SUCCESSMSG
+    })
+    .catch(err => {
+      console.log(err)
+      return ERRORMSG
+    })
 }
 
 const postCreateNewStory = async (data, dispatch) => {
@@ -31,9 +39,11 @@ const postCreateNewStory = async (data, dispatch) => {
         storyId: res.data.id
       }
       postNewStorySnippet(postSnippetData, dispatch)
+      return SUCCESSMSG
     })
     .catch(err => {
       console.log(err)
+      return ERRORMSG
     })
 }
 
@@ -52,8 +62,14 @@ const postNewStorySnippet = async (data, dispatch) => {
     url
   }
   axios(options)
-    .then(response => console.log(response))
-    .catch(err => console.log(err))
+    .then(response => {
+      console.log(response)
+      return SUCCESSMSG
+    })
+    .catch(err => {
+      console.log(err)
+      return ERRORMSG
+    })
 }
 
 export { getAllStories, postCreateNewStory, postNewStorySnippet }

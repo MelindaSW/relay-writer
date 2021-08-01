@@ -32,7 +32,10 @@ const ResponsiveDrawer = ({ title, drawerItems }) => {
 
   const drawer = (
     <div>
-      <div className={classes.toolbar} />
+      <div id="menuimage">
+        <img src={logo} alt="rw-icon" />
+      </div>
+      {/* <div className={classes.toolbar} /> */}
       <Divider />
       <List>
         {drawerItems.map((item, index) => (
@@ -44,9 +47,6 @@ const ResponsiveDrawer = ({ title, drawerItems }) => {
           </Link>
         ))}
       </List>
-      <div id="menuimage">
-        <img src={logo} alt="rw-icon" />
-      </div>
     </div>
   )
 

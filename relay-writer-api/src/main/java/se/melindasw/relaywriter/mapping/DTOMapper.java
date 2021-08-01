@@ -1,4 +1,4 @@
-package se.melindasw.relaywriter.helpers;
+package se.melindasw.relaywriter.mapping;
 
 import se.melindasw.relaywriter.role.Role;
 import se.melindasw.relaywriter.role.RoleDTO;
@@ -9,9 +9,9 @@ import se.melindasw.relaywriter.story.StoryDTO;
 import se.melindasw.relaywriter.user.User;
 import se.melindasw.relaywriter.user.UserDTO;
 
-public class DTOConverter {
+public class DTOMapper {
 
-  public UserDTO convertToUserDTO(User user) {
+  public UserDTO mapToUserDTO(User user) {
     UserDTO dto = new UserDTO();
     dto.setId(user.getId());
     dto.setCreatedAt(user.getCreatedAt());
@@ -20,7 +20,7 @@ public class DTOConverter {
     return dto;
   }
 
-  public RoleDTO convertToRoleDTO(Role role) {
+  public RoleDTO mapToRoleDTO(Role role) {
     RoleDTO dto = new RoleDTO();
     dto.setId(role.getId());
     dto.setRole(role.getRole());
@@ -28,7 +28,7 @@ public class DTOConverter {
     return dto;
   }
 
-  public StoryDTO convertToStoryDTO(Story story) {
+  public StoryDTO mapToStoryDTO(Story story) {
     StoryDTO dto = new StoryDTO();
     dto.setId(story.getId());
     dto.setCreatedAt(story.getCreatedAt());
@@ -37,18 +37,18 @@ public class DTOConverter {
     dto.setCharacterName(story.getCharacterName());
     dto.setCharacterRace(story.getCharacterRace());
     dto.setCharacterClass(story.getCharacterClass());
-    UserDTO creator = convertToUserDTO(story.getCreator());
+    UserDTO creator = mapToUserDTO(story.getCreator());
     dto.setCreator(creator);
     return dto;
   }
 
-  public SnippetDTO convertToSnippetDTO(Snippet s) {
+  public SnippetDTO mapToSnippetDTO(Snippet s) {
     SnippetDTO dto = new SnippetDTO();
     dto.setAuthor(s.getAuthor());
     dto.setCreatedAt(s.getCreatedAt());
     dto.setId(s.getId());
     dto.setSnippet(s.getSnippet());
-    StoryDTO story = convertToStoryDTO(s.getStory());
+    StoryDTO story = mapToStoryDTO(s.getStory());
     dto.setStory(story);
     return dto;
   }

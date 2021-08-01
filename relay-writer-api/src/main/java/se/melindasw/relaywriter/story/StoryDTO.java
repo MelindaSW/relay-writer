@@ -18,6 +18,7 @@ public class StoryDTO {
   String characterRace;
   String characterClass;
   UserDTO creator;
+  boolean isFinished;
 
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   @JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -33,6 +34,7 @@ public class StoryDTO {
       String characterName,
       String characterRace,
       String characterClass,
+      boolean isFinished,
       UserDTO creator) {
     this.id = id;
     this.createdAt = createdAt;
@@ -41,6 +43,7 @@ public class StoryDTO {
     this.characterName = characterName;
     this.characterRace = characterRace;
     this.characterClass = characterClass;
+    this.isFinished = isFinished;
     this.creator = creator;
   }
 }

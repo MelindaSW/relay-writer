@@ -26,6 +26,9 @@ public class Story {
   private String characterRace;
   private String characterClass;
 
+  @Column(columnDefinition = "boolean default false")
+  private boolean isFinished;
+
   @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
   private LocalDateTime createdAt;
 
@@ -53,5 +56,9 @@ public class Story {
     this.characterRace = characterRace;
     this.characterClass = characterClass;
     this.creator = creator;
+  }
+
+  public void setIsFinished(boolean finished) {
+    this.isFinished = finished;
   }
 }

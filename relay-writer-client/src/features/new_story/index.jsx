@@ -8,8 +8,13 @@ import './newStory.scss'
 
 const NewStory = props => {
   const dividerClasses = useDividerStyles()
+
+  const maxDescrLength = 40
+  const maxSnippetLength = 150
   const [submitEnabled, setSubmitEnabled] = useState(false)
   const [snippetLength, setSnippetLength] = useState(0)
+  const [descrLength, setDescrLength] = useState(0)
+
   const [formState, setFormState] = useState({
     title: '',
     description: '',
@@ -27,6 +32,9 @@ const NewStory = props => {
 
     if (event.target.id === 'start-your-story-here')
       setSnippetLength(event.target.value.length)
+
+    if (event.target.id === 'short-description')
+      setDescrLength(event.target.value.length)
 
     setSubmitEnabled(
       formState.title.length > 0 &&
@@ -67,6 +75,7 @@ const NewStory = props => {
         <Divider classes={dividerClasses} />
         <TextField
           class="form-fields"
+          fullWidth={true}
           id="story-title"
           label="Story Title"
           name="story-title"
@@ -77,7 +86,11 @@ const NewStory = props => {
         />
         <TextField
           class="form-fields"
+          fullWidth={true}
           id="short-description"
+          inputProps={{
+            maxLength: maxDescrLength
+          }}
           label="Short Description"
           name="description"
           onChange={e => handleOnChange(e)}
@@ -85,8 +98,12 @@ const NewStory = props => {
           placeholder=""
           required
         />
+        <div id="counter">
+          {descrLength}/{maxDescrLength}
+        </div>
         <TextField
           class="form-fields"
+          fullWidth={true}
           id="name-of-character"
           label="Name of Character"
           name="character-name"
@@ -97,6 +114,7 @@ const NewStory = props => {
         />
         <TextField
           class="form-fields"
+          fullWidth={true}
           id="dnd-race"
           label="DND Race"
           name="character-race"
@@ -107,6 +125,7 @@ const NewStory = props => {
         />
         <TextField
           class="form-fields"
+          fullWidth={true}
           id="dnd-class"
           label="DND Class"
           name="character-class"
@@ -117,8 +136,11 @@ const NewStory = props => {
         />
         <TextField
           class="form-fields"
+          fullWidth={true}
           id="start-your-story-here"
-          inputProps={{ maxLength: 150 }}
+          inputProps={{
+            maxLength: maxSnippetLength
+          }}
           label="Start Your Story Here"
           type="text"
           variant="outlined"
@@ -130,7 +152,9 @@ const NewStory = props => {
           maxRows={10}
           required
         />
-        <div id="counter">{snippetLength}/150</div>
+        <div id="counter">
+          {snippetLength}/{maxSnippetLength}
+        </div>
         <Divider classes={dividerClasses} />
         <div id="button">
           <Button
