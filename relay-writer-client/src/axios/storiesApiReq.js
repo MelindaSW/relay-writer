@@ -6,7 +6,7 @@ const getAllStories = () => {
   axios('http://localhost:8080/dnd-relay-writer/story/all')
     .then(res => {
       console.log(res)
-      return SUCCESSMSG
+      return res
     })
     .catch(err => {
       console.log(err)

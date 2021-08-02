@@ -11,6 +11,7 @@ const NewStory = props => {
 
   const maxDescrLength = 40
   const maxSnippetLength = 150
+
   const [submitEnabled, setSubmitEnabled] = useState(false)
   const [snippetLength, setSnippetLength] = useState(0)
   const [descrLength, setDescrLength] = useState(0)
@@ -168,6 +169,7 @@ const NewStory = props => {
     </div>
   )
 }
+
 const mapStateToProps = ({ newStoryState, userState }) => {
   return { newStoryState, userState }
 }
