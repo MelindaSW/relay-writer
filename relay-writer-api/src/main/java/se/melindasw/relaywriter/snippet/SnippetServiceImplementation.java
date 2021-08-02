@@ -40,6 +40,7 @@ public class SnippetServiceImplementation implements SnippetService {
     snippet.setSnippet(newSnippetDTO.getSnippet());
     snippet.setCreatedAt(newSnippetDTO.getCreatedAt());
     snippetRepo.save(snippet);
+    // TODO - make story finished if the number of total snippets equals the amount of snippets set in the database. Make sure to send a warning that no more entries are allowed.
     return converter.mapToSnippetDTO(snippet);
   }
 

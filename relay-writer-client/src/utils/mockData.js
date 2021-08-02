@@ -1,4 +1,4 @@
-export const mockStoriesData = [
+const mockStoriesData = [
   {
     id: 1,
     title: 'Awesome story title',
@@ -256,7 +256,7 @@ export const mockStoriesData = [
     finished: false
   },
   {
-    id: 323,
+    id: 3223,
     title: 'Awesome story title 1',
     description: 'A short description of the story',
     characterName: 'Ea',
@@ -321,7 +321,7 @@ export const mockStoriesData = [
   },
   {
     id: 132,
-    title: 'Awesome story title',
+    title: 'Yet another story title',
     description: 'A short description of the story',
     characterName: 'Kola',
     characterRace: 'Goliath',
@@ -480,3 +480,96 @@ export const mockStoriesData = [
     finished: true
   }
 ]
+
+const mockSnippetsData = [
+  {
+    id: 1,
+    snippet: 'Lorem ipsum dolor sit amet and so on...',
+    author: 'User1',
+    story: {
+      id: 1,
+      title: 'Awesome story title',
+      description: 'A short description of the story',
+      characterName: 'Kola',
+      characterRace: 'Goliath',
+      characterClass: 'Barbarian',
+      creator: {
+        id: 1,
+        userName: 'Administrator',
+        email: 'admin@email.com',
+        createdAt: '2021-08-01T13:46:07.78834'
+      },
+      createdAt: '2021-08-01T13:46:07.812518',
+      finished: false
+    },
+    createdAt: '2021-08-01T13:46:07.822419'
+  },
+  {
+    id: 2,
+    snippet: 'Lorem ipsum dolor sit amet and so on...',
+    author: 'User2',
+    story: {
+      id: 2,
+      title: 'Awesome story title yay it is',
+      description: 'A short description of the story',
+      characterName: 'Ea',
+      characterRace: 'Tiefling',
+      characterClass: 'Druid',
+      creator: {
+        id: 2,
+        userName: 'user2',
+        email: 'email2@email.com',
+        createdAt: '2021-08-01T13:46:07.791402'
+      },
+      createdAt: '2021-08-01T13:46:07.817858',
+      finished: false
+    },
+    createdAt: '2021-08-01T13:46:07.825802'
+  },
+  {
+    id: 3,
+    snippet: 'Lorem ipsum dolor sit amet and so on...',
+    author: 'User2',
+    story: {
+      id: 1,
+      title: 'Less awesome story title',
+      description: 'A short description of the story',
+      characterName: 'Kola',
+      characterRace: 'Goliath',
+      characterClass: 'Barbarian',
+      creator: {
+        id: 1,
+        userName: 'Administrator',
+        email: 'admin@email.com',
+        createdAt: '2021-08-01T13:46:07.78834'
+      },
+      createdAt: '2021-08-01T13:46:07.812518',
+      finished: false
+    },
+    createdAt: '2021-08-01T13:46:07.829263'
+  },
+  {
+    id: 4,
+    snippet: 'Lorem ipsum dolor sit amet and so on...',
+    author: 'User1',
+    story: {
+      id: 2,
+      title: 'Awesome story title again!',
+      description: 'A short description of the story',
+      characterName: 'Ea',
+      characterRace: 'Tiefling',
+      characterClass: 'Druid',
+      creator: {
+        id: 2,
+        userName: 'user2',
+        email: 'email2@email.com',
+        createdAt: '2021-08-01T13:46:07.791402'
+      },
+      createdAt: '2021-08-01T13:46:07.817858',
+      finished: false
+    },
+    createdAt: '2021-08-01T13:46:07.831732'
+  }
+]
+
+export { mockStoriesData, mockSnippetsData }

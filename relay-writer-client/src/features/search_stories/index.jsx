@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './searchStories.scss'
 import { getAllStories } from '../../axios/storiesApiReq'
-import { Table } from '../../components'
+import StoriesTable from './StoriesTable/StoriesTable'
 import Icon from '@material-ui/core/Icon'
 import { mockStoriesData } from '../../utils/mockData'
 
@@ -32,17 +32,15 @@ const SearchStories = props => {
   // }, [storiesList])
 
   return (
-    <>
-      <main id="search-stories">
-        <h2 className="title">Search</h2>
-        <p className="info">Find stories to read or contribute to here.</p>
-        <Icon color="action" style={{ fontSize: 40 }}>
-          filter_list
-        </Icon>
-        <div id="filter-selection"></div>
-        <Table headerData={headerData} rowData={mockStoriesData} />
-      </main>
-    </>
+    <div id="search-stories">
+      <h2 className="title">Search</h2>
+      <p className="info">Find stories to read or contribute to here.</p>
+      <Icon color="action" style={{ fontSize: 40 }}>
+        filter_list
+      </Icon>
+      <div id="filter-selection"></div>
+      <StoriesTable headerData={headerData} rowData={mockStoriesData} />
+    </div>
   )
 }
 
