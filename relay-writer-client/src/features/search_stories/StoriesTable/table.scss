@@ -1,10 +1,16 @@
 @import '../../../sass-and-MUI/variables.scss';
 
-#edit:hover {
-  cursor: pointer;
+$hovercolor: #28314948;
+#edit-icon,
+#read-icon,
+#expand-row {
+  border-radius: 50%;
+  transition: background-color 0.3s ease-in-out;
 }
 
+#edit-icon:hover,
+#read-icon:hover,
 #expand-row:hover {
-  color: black;
   cursor: pointer;
+  background-color: $hovercolor;
 }

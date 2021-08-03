@@ -5,7 +5,7 @@ import './mainPage.scss'
 const drawerItems = [
   { text: 'Home', link: '/home' },
   { text: 'Create story', link: '/home/create' },
-  { text: 'Continue story', link: '/home/continue' },
+  { text: 'Your stories', link: '/home/yourstories' },
   { text: 'Search stories', link: '/home/search' }
 ]
 

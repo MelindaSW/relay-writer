@@ -6,9 +6,8 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import TablePagination from '@material-ui/core/TablePagination'
-import Paper from '@material-ui/core/Paper'
 import Icon from '@material-ui/core/Icon'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, withStyles } from '@material-ui/core/styles'
 import './table.scss'
 
 const useStyles = makeStyles({
@@ -19,6 +18,14 @@ const useStyles = makeStyles({
     maxHeight: 700
   }
 })
+
+const StyledTableRow = withStyles(theme => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover
+    }
+  }
+}))(TableRow)
 
 const StoriesTable = props => {
   const { headerData, rowData } = props
@@ -40,26 +47,28 @@ const StoriesTable = props => {
   }
 
   return (
-    <Paper className={classes.root}>
+    <>
       <TableContainer className={classes.container}>
-        <Table>
+        <Table stickyHeader>
           <TableHead>
-            <TableRow key={1}>
+            <TableRow key={headerData[0]}>
               {headerData.map(data => (
-                <TableCell>{data}</TableCell>
+                <TableCell key={data}>{data}</TableCell>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {rowData
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map(d => (
-                <TableRow key={d.id}>
-                  <TableCell>{d.title}</TableCell>
-                  <TableCell>{d.creator.userName}</TableCell>
-                  <TableCell>{d.creator.createdAt.slice(0, 10)}</TableCell>
+              .map(data => (
+                <StyledTableRow key={data.id}>
+                  <TableCell>{data.title}</TableCell>
+                  <TableCell>{data.creator.userName}</TableCell>
+                  <TableCell>
+                    {data.creator.createdAt.replace('T', ' ').slice(0, 16)}
+                  </TableCell>
                   <TableCell align="right">
-                    {d.finished ? (
+                    {data.finished ? (
                       <Icon style={{ color: iconColor1 }} fontSize="small">
                         checked
                       </Icon>
@@ -70,12 +79,20 @@ const StoriesTable = props => {
                     )}
                   </TableCell>
                   <TableCell align="right">
-                    {d.finished ? (
-                      <Icon style={{ color: iconColor1 }} fontSize="small">
+                    {data.finished ? (
+                      <Icon
+                        id="read-icon"
+                        style={{ color: iconColor1 }}
+                        fontSize="small"
+                      >
                         auto_stories
                       </Icon>
                     ) : (
-                      <Icon style={{ color: iconColor2 }} fontSize="small">
+                      <Icon
+                        id="edit-icon"
+                        style={{ color: iconColor2 }}
+                        fontSize="small"
+                      >
                         edit
                       </Icon>
                     )}
@@ -85,13 +102,13 @@ const StoriesTable = props => {
                       <Icon
                         id="expand-row"
                         style={{ color: '#283149' }}
-                        fontSize="small"
+                        fontSize="medium"
                       >
                         expand_more
                       </Icon>
                     </span>
                   </TableCell>
-                </TableRow>
+                </StyledTableRow>
               ))}
           </TableBody>
         </Table>
@@ -105,7 +122,7 @@ const StoriesTable = props => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
+    </>
   )
 }
 
